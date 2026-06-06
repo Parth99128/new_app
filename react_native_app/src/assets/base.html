@@ -1,0 +1,2688 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#FF6B00">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>शिवशक्ती ज्योतिष केंद्र</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --saf:#FF6B00;--dsaf:#D45500;--gold:#FFB300;--lgold:#FFD54F;
+  --maroon:#7B1B00;--cream:#FFF8E1;--white:#fff;
+  --txt:#2C1810;--mid:#5D3A1A;--green:#2E7D32;--red:#C62828;
+  --shadow:0 4px 20px rgba(255,107,0,.22);
+  --card:0 2px 14px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins','Noto Sans Devanagari',sans-serif;background:#fff;color:var(--txt);min-height:100vh;overflow-x:hidden}
+
+/* ── HEADER ── */
+.app-hdr{background:linear-gradient(135deg,#FF6B00,#FFB300 60%,#FF8C00);position:sticky;top:0;z-index:200;box-shadow:0 3px 18px rgba(255,107,0,.45)}
+.hdr-top{display:flex;align-items:center;gap:10px;padding:10px 14px 6px}
+.hdr-logo{width:50px;height:50px;border-radius:50%;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;background:rgba(255,255,255,.2)}
+.hdr-info{flex:1}
+.hdr-info h1{font-size:13px;font-weight:800;color:#fff;text-shadow:1px 1px 3px rgba(0,0,0,.3);line-height:1.2}
+.hdr-info p{font-size:9px;color:rgba(255,255,255,.85)}
+.hdr-right{display:flex;gap:6px}
+.lang-btn,.live-btn{border-radius:20px;padding:4px 9px;font-size:10px;font-weight:700;cursor:pointer;border:1.5px solid rgba(255,255,255,.6);color:#fff;background:rgba(255,255,255,.2)}
+.live-btn{background:rgba(255,50,50,.35);border-color:rgba(255,100,100,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+
+/* ── NAV ── */
+.nav-wrap{display:flex;overflow-x:auto;background:rgba(0,0,0,.18);scrollbar-width:none}
+.nav-wrap::-webkit-scrollbar{display:none}
+.nav-tab{flex-shrink:0;padding:7px 12px;font-size:10px;font-weight:700;color:rgba(255,255,255,.75);cursor:pointer;white-space:nowrap;border-bottom:2.5px solid transparent;transition:.2s}
+.nav-tab.active{color:#fff;border-bottom-color:#fff;background:rgba(255,255,255,.12)}
+
+/* ── PAGES ── */
+.page{display:none;padding:14px;animation:fadeIn .3s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── TYPOGRAPHY ── */
+.sec-title{font-size:15px;font-weight:800;color:var(--saf);border-left:4px solid var(--gold);padding-left:10px;margin:14px 0 10px}
+.sec-sub{font-size:12px;color:var(--mid);margin-bottom:10px}
+
+/* ── CARDS ── */
+.card{background:#fff;border-radius:14px;border:1px solid #FFE0B2;box-shadow:var(--card);padding:14px;margin-bottom:12px}
+.card-o{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:1px solid #FFB300}
+.card-g{background:linear-gradient(135deg,#FFFDE7,#FFF9C4);border:1px solid #FFD54F}
+.card-green{background:#E8F5E9;border:1px solid #A5D6A7}
+.card-red{background:#FFEBEE;border:1px solid #FFCDD2}
+
+/* ── LIVE CLOCK ── */
+.live-clock{background:linear-gradient(135deg,#7B1B00,#FF6B00);border-radius:14px;padding:14px;text-align:center;margin-bottom:14px;color:#fff}
+.clock-time{font-size:36px;font-weight:800;letter-spacing:2px;font-family:'Tiro Devanagari Sanskrit',serif}
+.clock-date{font-size:13px;opacity:.9;margin-top:4px}
+.clock-tithi{font-size:11px;opacity:.8;margin-top:3px;color:var(--lgold)}
+
+/* ── RASHI GRID ── */
+.rashi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}
+.rashi-item{background:linear-gradient(135deg,#FFF3E0,#FFFDE7);border:1.5px solid #FFB300;border-radius:12px;padding:10px 5px;text-align:center;cursor:pointer;transition:.2s}
+.rashi-item.sel{background:linear-gradient(135deg,#FF6B00,#FFB300);border-color:#FF6B00}
+.rashi-item.sel *{color:#fff!important}
+.r-sym{font-size:22px}.r-name{font-size:11px;font-weight:700;color:var(--maroon)}.r-eng{font-size:9px;color:var(--mid)}
+
+/* ── RASHI DETAIL ── */
+.rashi-detail{display:none;animation:fadeIn .3s ease}
+.rashi-detail.show{display:block}
+.lucky-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.lucky-item{background:#FFF3E0;border-radius:10px;padding:8px;text-align:center;border:1px solid #FFB300}
+.lucky-lbl{font-size:10px;color:var(--mid)}.lucky-val{font-size:13px;font-weight:700;color:var(--saf)}
+.gb-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.g-box{background:#E8F5E9;border:1px solid #A5D6A7;border-radius:10px;padding:10px}
+.b-box{background:#FFEBEE;border:1px solid #FFCDD2;border-radius:10px;padding:10px}
+.g-box h4{color:var(--green);font-size:11px;margin-bottom:6px}.b-box h4{color:var(--red);font-size:11px;margin-bottom:6px}
+.g-box li,.b-box li{font-size:10px;margin-left:12px;margin-bottom:3px;line-height:1.5}
+
+/* ── KUNDALI ── */
+.k-form{display:grid;gap:10px}
+.fg label{font-size:12px;font-weight:600;color:var(--mid);display:block;margin-bottom:4px}
+.fg input,.fg select,.fg textarea{width:100%;padding:10px 12px;border:1.5px solid #FFB300;border-radius:10px;font-size:13px;background:#FFFDE7;outline:none;color:var(--txt);font-family:inherit}
+.fg input:focus,.fg select:focus{border-color:#FF6B00}
+.sub-btn{background:linear-gradient(135deg,#FF6B00,#D45500);color:#fff;border:none;border-radius:12px;padding:13px;font-size:14px;font-weight:700;width:100%;cursor:pointer;box-shadow:0 4px 14px rgba(255,107,0,.4);margin-top:6px;font-family:inherit}
+.sub-btn:active{transform:scale(.97)}
+
+/* ── KUNDALI CHART ── */
+.k-chart-wrap{display:none;margin-top:16px;animation:fadeIn .4s ease}
+.k-chart-wrap.show{display:block}
+.k-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--saf);border:2px solid var(--saf);border-radius:10px;overflow:hidden;aspect-ratio:1;margin-bottom:12px}
+.kc{background:#FFFDE7;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3px;font-size:8px;text-align:center;color:var(--maroon);font-weight:600;min-height:58px}
+.kc .pl{font-size:14px}.kc.center{background:linear-gradient(135deg,#FFF3E0,#FFE0B2)}
+.planet-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:10px}
+.planet-table th{background:var(--saf);color:#fff;padding:6px 8px;text-align:left}
+.planet-table td{padding:6px 8px;border-bottom:1px solid #FFE0B2}
+.planet-table tr:nth-child(even) td{background:#FFF8E1}
+.dosha-badge{display:inline-block;border-radius:8px;padding:2px 8px;font-size:10px;font-weight:700;margin:3px 2px}
+.dosha-yes{background:#FFEBEE;color:var(--red);border:1px solid #FFCDD2}
+.dosha-no{background:#E8F5E9;color:var(--green);border:1px solid #A5D6A7}
+
+/* ── PANCHANG / CALENDAR ── */
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.cal-nav{background:var(--saf);color:#fff;border:none;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:14px;font-weight:700}
+.cal-title{font-size:15px;font-weight:700;color:var(--maroon)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:14px}
+.cal-day-hdr{text-align:center;font-size:9px;font-weight:700;color:var(--saf);padding:4px 0}
+.cal-day{text-align:center;padding:6px 2px;border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--txt);border:1px solid transparent;transition:.15s;min-height:36px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.cal-day:hover{background:#FFF3E0;border-color:#FFB300}
+.cal-day.today{background:linear-gradient(135deg,#FF6B00,#FFB300);color:#fff;border-color:#FF6B00}
+.cal-day.sel-day{background:#FFF3E0;border-color:#FF6B00;color:var(--maroon)}
+.cal-day .dot{width:4px;height:4px;border-radius:50%;background:var(--gold);margin-top:2px}
+.cal-day.sun{color:var(--red)}.cal-day.sat{color:#1565C0}
+.panch-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.panch-item{background:linear-gradient(135deg,#FFF3E0,#FFFDE7);border:1px solid #FFB300;border-radius:12px;padding:12px;text-align:center}
+.panch-icon{font-size:22px;margin-bottom:3px}.panch-lbl{font-size:10px;color:var(--mid);font-weight:600}.panch-val{font-size:13px;font-weight:700;color:var(--maroon);margin-top:2px}
+
+/* ── PUJA BOOKING ── */
+.puja-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.puja-card{background:linear-gradient(135deg,#FFF3E0,#FFFDE7);border:1.5px solid #FFB300;border-radius:14px;padding:12px;text-align:center;cursor:pointer;transition:.2s;position:relative}
+.puja-card:active{transform:scale(.96)}
+.puja-card.sel-puja{background:linear-gradient(135deg,#FF6B00,#FFB300);border-color:#FF6B00}
+.puja-card.sel-puja *{color:#fff!important}
+.puja-icon{font-size:28px;margin-bottom:4px}.puja-name{font-size:11px;font-weight:700;color:var(--maroon)}.puja-price{font-size:10px;color:var(--saf);margin-top:2px}.puja-dur{font-size:9px;color:var(--mid)}
+.booking-form{display:none;animation:fadeIn .3s ease}
+.booking-form.show{display:block}
+.type-tabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.type-tab{padding:6px 12px;border-radius:20px;border:1.5px solid #FFB300;font-size:11px;font-weight:600;cursor:pointer;color:var(--saf);background:#FFF3E0;transition:.2s}
+.type-tab.active-tab{background:var(--saf);color:#fff;border-color:var(--saf)}
+
+/* ── MANTRAS ── */
+.mantra-cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
+.mcat{background:linear-gradient(135deg,#FFF3E0,#FFFDE7);border:1.5px solid #FFB300;border-radius:12px;padding:12px;text-align:center;cursor:pointer;transition:.2s}
+.mcat:active{transform:scale(.96)}
+.mcat-icon{font-size:26px;margin-bottom:4px}.mcat-name{font-size:11px;font-weight:700;color:var(--maroon)}
+.mantra-detail{display:none;animation:fadeIn .3s ease}
+.mantra-detail.show{display:block}
+.mantra-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:15px;line-height:2.2;color:var(--maroon);background:linear-gradient(135deg,#FFF3E0,#FFFDE7);border-radius:14px;padding:16px;border:1.5px solid #FFB300;white-space:pre-line;margin-bottom:10px}
+.mantra-meaning{font-size:12px;line-height:1.8;color:var(--txt);background:#F3E5F5;border-radius:10px;padding:12px;border-left:4px solid #9C27B0;margin-bottom:10px}
+.play-btn{background:linear-gradient(135deg,#4CAF50,#2E7D32);color:#fff;border:none;border-radius:10px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;width:100%;font-family:inherit;margin-top:6px}
+.back-btn{background:#FFF3E0;border:1.5px solid #FFB300;border-radius:10px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;color:var(--saf);font-family:inherit;margin-bottom:10px}
+.aarti-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:13px;line-height:2.1;color:var(--maroon);white-space:pre-line}
+
+/* ── SERVICES INTERACTIVE ── */
+.svc-detail{display:none;animation:fadeIn .3s ease}
+.svc-detail.show{display:block}
+.service-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.svc-item{background:linear-gradient(135deg,#FFF3E0,#FFFDE7);border:1.5px solid #FFB300;border-radius:14px;padding:13px;text-align:center;cursor:pointer;transition:.2s}
+.svc-item:active{transform:scale(.96)}
+.svc-icon{font-size:30px;margin-bottom:5px}.svc-name{font-size:11px;font-weight:700;color:var(--maroon)}.svc-desc{font-size:9px;color:var(--mid);margin-top:2px}
+
+/* ── GURUJI ── */
+.guruji-card{background:linear-gradient(135deg,#FFF3E0,#FFFDE7);border-radius:16px;border:2px solid var(--gold);padding:14px;margin-bottom:14px;position:relative;box-shadow:0 4px 18px rgba(255,179,0,.2)}
+.gj-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.gj-avatar{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#FF6B00,#FFB300);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;border:3px solid #fff;box-shadow:0 2px 8px rgba(255,107,0,.3)}
+.gj-info h3{font-size:14px;font-weight:700;color:var(--maroon)}.gj-info p{font-size:11px;color:var(--mid)}
+.badge{display:inline-block;background:var(--saf);color:#fff;border-radius:10px;padding:2px 8px;font-size:9px;font-weight:700;margin-top:3px}
+.del-btn{position:absolute;top:10px;right:10px;background:#ffebee;border:1px solid #ef9a9a;border-radius:8px;padding:4px 8px;font-size:10px;color:var(--red);cursor:pointer;font-weight:700}
+.call-btn{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FF6B00,#D45500);color:#fff;border:none;border-radius:10px;padding:10px 16px;width:100%;cursor:pointer;font-size:13px;font-weight:700;justify-content:center;box-shadow:0 3px 10px rgba(255,107,0,.35);margin-top:8px;text-decoration:none;font-family:inherit}
+.wa-btn{background:linear-gradient(135deg,#25D366,#128C7E);margin-top:6px}
+
+/* ── YOGA JOURNAL ── */
+.yoga-entry{background:linear-gradient(135deg,#E3F2FD,#E8EAF6);border:1px solid #90CAF9;border-radius:12px;padding:12px;margin-bottom:10px;position:relative}
+.yoga-date{font-size:10px;color:#1565C0;font-weight:600}.yoga-content{font-size:12px;line-height:1.7;margin-top:4px}
+.del-yoga{position:absolute;top:8px;right:8px;background:#ffebee;border:1px solid #ef9a9a;border-radius:6px;padding:2px 6px;font-size:10px;color:var(--red);cursor:pointer}
+
+/* ── MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:20px;padding:18px;width:100%;max-width:430px;max-height:90vh;overflow-y:auto;animation:slideUp .3s ease;box-shadow:0 10px 40px rgba(0,0,0,.3)}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal h3{font-size:16px;font-weight:700;color:var(--saf);margin-bottom:14px}
+.modal-close{float:right;background:#ffebee;border:none;border-radius:8px;padding:4px 10px;cursor:pointer;font-weight:700;color:var(--red);font-size:13px}
+
+/* ── FAB ── */
+.fab{position:fixed;bottom:22px;right:18px;background:linear-gradient(135deg,#FF6B00,#D45500);color:#fff;border:none;border-radius:50%;width:54px;height:54px;font-size:24px;cursor:pointer;box-shadow:0 6px 20px rgba(255,107,0,.5);display:flex;align-items:center;justify-content:center;z-index:500;transition:.2s}
+.fab:active{transform:scale(.92)}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:9px 20px;border-radius:20px;font-size:12px;z-index:1000;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1}
+
+/* ── SMS SENT MODAL ── */
+.sms-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:2000;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(3px)}
+.sms-modal-overlay.open{display:flex;animation:fadeIn .25s ease}
+.sms-modal{background:#fff;border-radius:24px;padding:0;width:100%;max-width:400px;overflow:hidden;box-shadow:0 16px 60px rgba(0,0,0,.4);animation:slideUp .3s ease}
+.sms-modal-header-accept{background:linear-gradient(135deg,#1B5E20,#2E7D32,#43A047);padding:20px 18px 16px;text-align:center;position:relative}
+.sms-modal-header-reject{background:linear-gradient(135deg,#B71C1C,#C62828,#E53935);padding:20px 18px 16px;text-align:center;position:relative}
+.sms-modal-icon{font-size:52px;display:block;margin-bottom:6px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.25))}
+.sms-modal-title{font-size:18px;font-weight:800;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.3)}
+.sms-modal-subtitle{font-size:12px;color:rgba(255,255,255,.85);margin-top:4px}
+.sms-modal-body{padding:18px}
+.sms-phone-chip{background:linear-gradient(135deg,#E3F2FD,#BBDEFB);border:2px solid #42A5F5;border-radius:14px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.sms-phone-chip-icon{font-size:26px;flex-shrink:0}
+.sms-phone-chip-info{flex:1}
+.sms-phone-chip-label{font-size:10px;color:#1565C0;font-weight:700}
+.sms-phone-chip-number{font-size:17px;font-weight:800;color:#0D47A1;letter-spacing:1px}
+.sms-bubble{background:linear-gradient(135deg,#F1F8E9,#E8F5E9);border:1.5px solid #A5D6A7;border-radius:16px 16px 16px 4px;padding:14px 16px;margin-bottom:14px;position:relative}
+.sms-bubble-header{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.sms-bubble-badge{background:#25D366;color:#fff;font-size:9px;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:.5px}
+.sms-bubble-sender{font-size:10px;font-weight:700;color:#1B5E20}
+.sms-bubble-time{font-size:9px;color:#999;margin-left:auto}
+.sms-bubble-text{font-size:12px;color:#1B5E20;font-weight:600;line-height:1.9;white-space:pre-line}
+.sms-modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.sms-whatsapp-btn{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;border-radius:14px;padding:13px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 3px 12px rgba(37,211,102,.35)}
+.sms-close-btn{background:linear-gradient(135deg,#FF6B00,#D45500);color:#fff;border:none;border-radius:14px;padding:13px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 3px 12px rgba(255,107,0,.35)}
+.sms-api-note{font-size:10px;color:#999;text-align:center;margin-top:10px;line-height:1.6}
+
+/* ── TEMPLE SECTION ── */
+.temple-god-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.temple-god-card{background:linear-gradient(160deg,#FFF3E0,#FFFDE7);border:2px solid #FFB300;border-radius:16px;padding:10px 6px;text-align:center;cursor:pointer;transition:.25s;position:relative;overflow:hidden}
+.temple-god-card:active{transform:scale(.94)}
+.temple-god-card.selected-god{background:linear-gradient(160deg,#FF6B00,#FFB300);border-color:#D45500;box-shadow:0 0 18px rgba(255,107,0,.55)}
+.temple-god-card.selected-god *{color:#fff!important}
+.temple-god-card.selected-god .tg-emoji{filter:drop-shadow(0 0 8px rgba(255,255,255,.8))}
+.tg-emoji{font-size:34px;display:block;margin-bottom:4px;transition:.3s}
+.tg-name{font-size:10px;font-weight:700;color:var(--maroon);line-height:1.3}
+.tg-mantra{font-size:8px;color:var(--mid);margin-top:2px}
+
+/* ── VIRTUAL TEMPLE ── */
+.vtemple-wrap{display:none;animation:fadeIn .4s ease}
+.vtemple-wrap.show{display:block}
+.vtemple-stage{background:linear-gradient(180deg,#1a0533 0%,#3d1a00 40%,#5c2800 70%,#2d1200 100%);border-radius:20px;padding:20px 14px 16px;text-align:center;position:relative;overflow:hidden;min-height:300px;margin-bottom:14px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.vtemple-stage::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(255,180,0,.18) 0%,transparent 70%);pointer-events:none}
+.temple-arch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:160px;height:100px;border:3px solid rgba(255,179,0,.4);border-bottom:none;border-radius:80px 80px 0 0;pointer-events:none}
+.temple-arch2{position:absolute;top:4px;left:50%;transform:translateX(-50%);width:148px;height:92px;border:1.5px solid rgba(255,210,100,.2);border-bottom:none;border-radius:74px 74px 0 0;pointer-events:none}
+.god-shrine{display:flex;flex-direction:column;align-items:center;position:relative;z-index:5;padding-top:10px}
+.god-main-emoji{font-size:72px;filter:drop-shadow(0 0 18px rgba(255,200,50,.7));animation:godGlow 3s ease-in-out infinite;display:block;margin-bottom:2px}
+@keyframes godGlow{0%,100%{filter:drop-shadow(0 0 18px rgba(255,200,50,.7))}50%{filter:drop-shadow(0 0 28px rgba(255,220,80,1))}}
+.god-shrine-name{font-size:16px;font-weight:800;color:#FFD700;text-shadow:0 0 10px rgba(255,200,0,.8);letter-spacing:1px;font-family:'Tiro Devanagari Sanskrit',serif}
+.god-shrine-mantra{font-size:11px;color:rgba(255,220,150,.8);margin-top:4px;font-family:'Tiro Devanagari Sanskrit',serif}
+
+/* diyas row */
+.diya-row{display:flex;justify-content:center;gap:10px;margin:10px 0;position:relative;z-index:5}
+.diya{font-size:20px;animation:diyaFlicker 1.5s ease-in-out infinite}
+.diya:nth-child(2){animation-delay:.3s}.diya:nth-child(3){animation-delay:.6s}.diya:nth-child(4){animation-delay:.9s}
+@keyframes diyaFlicker{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(.9)}}
+
+/* floating flowers */
+.flower-container{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:6}
+.flower-particle{position:absolute;font-size:14px;animation:flowerFall linear forwards}
+@keyframes flowerFall{0%{opacity:1;transform:translateY(-20px) rotate(0deg)}100%{opacity:0;transform:translateY(280px) rotate(360deg)}}
+
+/* agarbatti */
+.agarbatti-wrap{position:absolute;right:18px;bottom:50px;display:flex;flex-direction:column;align-items:center;z-index:7}
+.agarbatti-smoke{width:3px;height:30px;background:linear-gradient(to top,transparent,rgba(200,200,200,.5));border-radius:2px;animation:smokeDrift 2s ease-in-out infinite;transform-origin:bottom center}
+@keyframes smokeDrift{0%,100%{transform:scaleX(1) translateX(0)}50%{transform:scaleX(2) translateX(4px)}}
+.agarbatti-stick{width:2px;height:50px;background:linear-gradient(#8B4513,#D2691E);border-radius:1px}
+.agarbatti-tip{width:6px;height:6px;background:#FF6600;border-radius:50%;animation:tipGlow .8s ease-in-out infinite alternate}
+@keyframes tipGlow{from{box-shadow:0 0 4px #FF6600}to{box-shadow:0 0 10px #FF8800,0 0 16px #FF6600}}
+
+/* aarti plate */
+.aarti-plate-wrap{position:absolute;left:14px;bottom:46px;z-index:7}
+.aarti-plate{font-size:28px;display:block;transform-origin:center;transition:.3s}
+.aarti-plate.rotating{animation:aartiRotate 1.2s linear infinite}
+@keyframes aartiRotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* temple controls */
+.temple-controls{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.temple-ctrl-btn{background:linear-gradient(135deg,#FFF3E0,#FFFDE7);border:2px solid #FFB300;border-radius:14px;padding:12px 6px;text-align:center;cursor:pointer;transition:.2s;font-family:inherit}
+.temple-ctrl-btn:active{transform:scale(.93);background:linear-gradient(135deg,#FF6B00,#FFB300)}
+.temple-ctrl-btn:active *{color:#fff!important}
+.temple-ctrl-btn.active-ctrl{background:linear-gradient(135deg,#FF6B00,#FFB300);border-color:#D45500;box-shadow:0 4px 14px rgba(255,107,0,.4)}
+.temple-ctrl-btn.active-ctrl *{color:#fff!important}
+.ctrl-icon{font-size:22px;display:block;margin-bottom:3px}
+.ctrl-label{font-size:10px;font-weight:700;color:var(--maroon)}
+
+/* aarti lyrics panel */
+.aarti-panel{display:none;background:linear-gradient(135deg,#3d1a00,#1a0533);border-radius:16px;padding:16px;margin-bottom:14px;animation:fadeIn .3s ease;border:2px solid rgba(255,179,0,.4)}
+.aarti-panel.show{display:block}
+.aarti-panel-title{font-size:14px;font-weight:800;color:#FFD700;text-align:center;margin-bottom:10px;font-family:'Tiro Devanagari Sanskrit',serif}
+.aarti-panel-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:13px;line-height:2.2;color:#FFF8DC;white-space:pre-line;text-align:center}
+.aarti-playing-badge{background:rgba(255,107,0,.3);border:1px solid rgba(255,179,0,.5);border-radius:20px;padding:4px 12px;font-size:10px;color:#FFD700;display:inline-block;margin-bottom:8px;animation:pulse 1.5s infinite}
+.no-god-msg{text-align:center;padding:30px 14px;color:rgba(255,200,100,.7);font-size:13px}
+.select-god-tip{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border:2px dashed #FFB300;border-radius:14px;padding:16px;text-align:center;margin-bottom:14px}
+.select-god-tip p{font-size:13px;color:var(--mid);font-weight:600}
+
+/* Shankh animation */
+@keyframes shankhPulse{0%{transform:scale(1)}50%{transform:scale(1.3) rotate(-10deg)}100%{transform:scale(1)}}
+.shankh-anim{animation:shankhPulse .4s ease 3}
+
+/* Bell animation */
+@keyframes bellRing{0%,100%{transform:rotate(0deg)}20%{transform:rotate(-25deg)}40%{transform:rotate(25deg)}60%{transform:rotate(-15deg)}80%{transform:rotate(15deg)}}
+.bell-anim{animation:bellRing .5s ease 2}
+
+/* ── MISC ── */
+.divider{height:1px;background:linear-gradient(90deg,transparent,#FFB300,transparent);margin:12px 0}
+.tip-card{background:#FFF3E0;border-radius:12px;border-left:4px solid var(--gold);padding:12px;margin-bottom:10px;font-size:12px;color:var(--txt);line-height:1.7}
+.info-banner{background:linear-gradient(135deg,#FF6B00,#FFB300);border-radius:14px;padding:14px;text-align:center;margin-bottom:14px;color:#fff}
+.info-banner h2{font-size:16px;font-weight:800}.info-banner p{font-size:11px;margin-top:3px;opacity:.9}
+.chant-controls{display:flex;gap:8px;margin-bottom:10px;align-items:center}
+.chant-count{background:#FFF3E0;border:1.5px solid #FFB300;border-radius:8px;padding:5px 10px;font-size:13px;font-weight:700;color:var(--maroon);min-width:50px;text-align:center}
+.count-btn{background:var(--saf);color:#fff;border:none;border-radius:8px;padding:6px 12px;font-size:16px;font-weight:700;cursor:pointer;flex:1}
+.highlight-verse{background:#FFE082;border-radius:6px;padding:1px 4px}
+.stars{color:#FFB300;font-size:14px}
+
+/* ── PUJA BACKEND ── */
+.puja-main-tabs{display:flex;gap:0;margin-bottom:14px;border-radius:12px;overflow:hidden;border:1.5px solid #FFB300;background:#FFF3E0}
+.puja-main-tab{flex:1;padding:10px 6px;font-size:11px;font-weight:700;text-align:center;cursor:pointer;color:#FF6B00;transition:.2s;border:none;background:none;font-family:inherit}
+.puja-main-tab.active{background:linear-gradient(135deg,#FF6B00,#D45500);color:#fff}
+.status-badge{display:inline-block;border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700}
+.status-pending{background:#FFF8E1;color:#E65100;border:1px solid #FFB300}
+.status-accepted{background:#E8F5E9;color:#1B5E20;border:1px solid #81C784}
+.status-rejected{background:#FFEBEE;color:#B71C1C;border:1px solid #EF9A9A}
+.req-card{background:#fff;border-radius:14px;border:1px solid #FFE0B2;box-shadow:0 2px 10px rgba(0,0,0,.07);padding:14px;margin-bottom:12px;position:relative}
+.req-card-pending{border-left:4px solid #FFB300}
+.req-card-accepted{border-left:4px solid #81C784;background:#FAFFF8}
+.req-card-rejected{border-left:4px solid #EF9A9A;background:#FFFAFA}
+.decide-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.accept-btn{background:linear-gradient(135deg,#2E7D32,#1B5E20);color:#fff;border:none;border-radius:10px;padding:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.reject-btn{background:linear-gradient(135deg,#C62828,#B71C1C);color:#fff;border:none;border-radius:10px;padding:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.gj-login-wrap{max-width:340px;margin:20px auto}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.stat-box{border-radius:12px;padding:12px 6px;text-align:center}
+.stat-num{font-size:24px;font-weight:800}
+.stat-lbl{font-size:10px;font-weight:600}
+.filter-tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.ftab{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:1.5px solid #FFB300;color:#FF6B00;background:#FFF3E0;font-family:inherit}
+.ftab.on{background:linear-gradient(135deg,#FF6B00,#D45500);color:#fff;border-color:#D45500}
+.sms-toast-wrap{position:fixed;bottom:88px;right:14px;display:flex;flex-direction:column;gap:8px;z-index:9999;pointer-events:none;max-width:290px}
+.sms-toast{border-radius:14px;padding:10px 14px;font-size:11px;color:#fff;box-shadow:0 4px 18px rgba(0,0,0,.3);animation:slideRight .4s ease;pointer-events:auto}
+.sms-guruji{background:linear-gradient(135deg,#7B1B00,#D45500)}
+.sms-user{background:linear-gradient(135deg,#1B5E20,#388E3C)}
+.sms-label{font-size:9px;font-weight:800;opacity:.8;margin-bottom:3px}
+@keyframes slideRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+.ai-panel{background:linear-gradient(135deg,#EDE7F6,#F3E5F5);border:1.5px solid #CE93D8;border-radius:14px;padding:14px;margin-bottom:14px}
+.ai-analyze-btn{background:linear-gradient(135deg,#9C27B0,#6A1B9A);color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}
+.guruji-note-inp{width:100%;padding:8px 10px;border:1.5px solid #FFB300;border-radius:8px;font-size:11px;background:#FFFDE7;outline:none;color:#2C1810;font-family:inherit;box-sizing:border-box;margin-top:8px;margin-bottom:4px}
+.req-meta{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:8px 0;font-size:11px;color:#5D3A1A}
+/* OTP boxes */
+.gjOtpBox{width:58px;height:64px;text-align:center;font-size:26px;font-weight:800;color:var(--maroon);border:2.5px solid #FFB300;border-radius:14px;background:#FFFDE7;outline:none;font-family:inherit;transition:border-color .18s,background .18s,box-shadow .18s;-webkit-appearance:none;appearance:none;caret-color:transparent}
+.gjOtpBox:focus{border-color:#FF6B00;box-shadow:0 0 0 4px rgba(255,107,0,.15);background:#FFF3E0}
+</style>
+<meta name="theme-color" content="#FF6B00">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ShivShakti">
+
+<!-- Inline manifest -->
+<script>
+(function(){
+  const manifest = {
+    name: "शिवशक्ती ज्योतिष केंद्र",
+    short_name: "ShivShakti",
+    description: "ज्योतिष, पूजा बुकिंग व धार्मिक विधी केंद्र",
+    start_url: "./",
+    display: "standalone",
+    background_color: "#FFF8E1",
+    theme_color: "#FF6B00",
+    orientation: "portrait",
+    icons: [
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='32' fill='%23FF6B00'/%3E%3Ctext x='96' y='130' font-size='110' text-anchor='middle'%3E%F0%9D%95%89%3C/text%3E%3C/svg%3E", sizes: "192x192", type: "image/svg+xml" },
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='80' fill='%23FF6B00'/%3E%3Ctext x='256' y='340' font-size='300' text-anchor='middle'%3E%F0%9D%95%89%3C/text%3E%3C/svg%3E", sizes: "512x512", type: "image/svg+xml" }
+    ]
+  };
+  const blob = new Blob([JSON.stringify(manifest)], {type:'application/manifest+json'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('link');
+  link.rel = 'manifest'; link.href = url;
+  document.head.appendChild(link);
+})();
+</script>
+
+<!-- Service Worker: only registers when sw.js is available (local/hosted), silently skipped otherwise -->
+<script>
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.getRegistrations().then(regs => {
+    // Unregister any stale sw.js registrations to clear old 404 errors
+    regs.forEach(r => { if(r.active && r.active.scriptURL.includes('sw.js')) r.unregister(); });
+  }).catch(()=>{});
+}
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="app-hdr">
+  <div class="hdr-top">
+    <div class="hdr-logo">🕉️</div>
+    <div class="hdr-info">
+      <h1 id="appTitle">शिवशक्ती ज्योतिष व धार्मिक विधी केंद्र</h1>
+      <p id="appSub">|| श्री दुर्गा कालीमाता प्रसन्न ||</p>
+    </div>
+    <div class="hdr-right">
+      <button class="live-btn">🔴 LIVE</button>
+      <button class="lang-btn" onclick="cycleLang()">🌐 <span id="langLbl">MR</span></button>
+    </div>
+  </div>
+  <div class="nav-wrap">
+    <div class="nav-tab active" onclick="goPage('home')">🏠 <span id="n0">मुख्य</span></div>
+    <div class="nav-tab" onclick="goPage('guruji')">👳 <span id="n1">गुरुजी</span></div>
+    <div class="nav-tab" onclick="goPage('rashi')">♈ <span id="n2">राशी</span></div>
+    <div class="nav-tab" onclick="goPage('kundali')">📜 <span id="n3">कुंडली</span></div>
+    <div class="nav-tab" onclick="goPage('calendar')">📅 <span id="n4">पंचांग</span></div>
+    <div class="nav-tab" onclick="goPage('puja')">🔱 <span id="n5">पूजा</span></div>
+    <div class="nav-tab" onclick="goPage('mantra')">🎵 <span id="n6">मंत्र</span></div>
+    <div class="nav-tab" onclick="goPage('aarti')">🪔 <span id="n7">आरती</span></div>
+    <div class="nav-tab" onclick="goPage('yoga')">🧘 <span id="n8">योग</span></div>
+    <div class="nav-tab" onclick="goPage('services')">🌟 <span id="n9">सेवा</span></div>
+    <div class="nav-tab" onclick="goPage('temple')">🛕 <span id="n10">मंदिर</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════ HOME ═══════════════════ -->
+<div class="page active" id="page-home">
+  <div class="live-clock">
+    <div class="clock-time" id="clockTime">00:00:00</div>
+    <div class="clock-date" id="clockDate">—</div>
+    <div class="clock-tithi" id="clockTithi">तिथी लोड होत आहे...</div>
+  </div>
+
+  <div class="info-banner">
+    <h2>🕉️ जय माता दी!</h2>
+    <p>ज्योतिष • धार्मिक विधी • वास्तु • पूजा बुकिंग</p>
+  </div>
+
+  <p class="sec-title">🌟 त्वरित सेवा</p>
+  <div class="service-grid">
+    <div class="svc-item" onclick="goPage('rashi')"><div class="svc-icon">🌙</div><div class="svc-name">दैनिक राशी</div><div class="svc-desc">आजचे भविष्य</div></div>
+    <div class="svc-item" onclick="goPage('kundali')"><div class="svc-icon">📜</div><div class="svc-name">कुंडली</div><div class="svc-desc">जन्मपत्रिका</div></div>
+    <div class="svc-item" onclick="goPage('puja')"><div class="svc-icon">🔱</div><div class="svc-name">पूजा बुकिंग</div><div class="svc-desc">ऑनलाईन बुक करा</div></div>
+    <div class="svc-item" onclick="goPage('mantra')"><div class="svc-icon">🎵</div><div class="svc-name">मंत्र संग्रह</div><div class="svc-desc">सर्व मंत्र</div></div>
+    <div class="svc-item" onclick="goPage('aarti')"><div class="svc-icon">🪔</div><div class="svc-name">आरती</div><div class="svc-desc">सर्व देवांच्या आरती</div></div>
+    <div class="svc-item" onclick="goPage('calendar')"><div class="svc-icon">📅</div><div class="svc-name">पंचांग</div><div class="svc-desc">शुभ मुहूर्त</div></div>
+  </div>
+
+  <p class="sec-title">💒 विनामुल्य वधु-वर केंद्र</p>
+  <div class="card card-g">
+    <p style="font-size:12px;line-height:1.8">🔱 आमच्या केंद्रात <strong>विनामुल्य वधु-वर नोंदणी</strong> करा. कुंडली जुळणी करून योग्य जोडीदार निवडण्यास मदत.</p>
+    <a href="tel:9969483437" class="call-btn" style="margin-top:10px">📞 9969483437 – संपर्क करा</a>
+  </div>
+
+  <p class="sec-title">💡 आजचा विचार</p>
+  <div class="tip-card" id="dailyThought"></div>
+</div>
+
+<!-- ═══════════════════ GURUJI ═══════════════════ -->
+<div class="page" id="page-guruji">
+  <p class="sec-title">👳 गुरुजी माहिती</p>
+  <div class="guruji-card">
+    <div class="gj-header">
+      <div class="gj-avatar">🧘</div>
+      <div class="gj-info">
+        <h3>श्री. नकुल धर्माधिकारी (गुरुजी)</h3>
+        <p>📍 महाराष्ट्र | ⭐ 25+ वर्षे अनुभव</p>
+        <span class="badge">ज्योतिष तज्ञ</span>
+        <span class="badge" style="background:#7B1B00;margin-left:4px">वास्तु विशारद</span>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <p style="font-size:12px;line-height:1.9;margin-bottom:10px">
+      🎓 <strong>विशेषज्ञता:</strong> जन्म कुंडली, कुंडली जुळणी, वास्तु शास्त्र, धार्मिक विधी<br>
+      🌟 <strong>सेवा क्षेत्र:</strong> महाराष्ट्र व संपूर्ण भारत<br>
+      🕉️ <strong>उपासना:</strong> श्री दुर्गा कालीमाता भक्त<br>
+      📚 <strong>शिक्षण:</strong> ज्योतिष तथा वास्तु विशारद
+    </p>
+    <div class="stars">⭐⭐⭐⭐⭐ <span style="font-size:11px;color:var(--mid)">(500+ समाधानी ग्राहक)</span></div>
+    <a href="tel:9969483437" class="call-btn">📞 9969483437 – आत्ता कॉल करा</a>
+    <a href="https://wa.me/919969483437" class="call-btn wa-btn" target="_blank">💬 WhatsApp वर संपर्क</a>
+  </div>
+
+  <div id="gj-list"></div>
+  <button class="sub-btn" onclick="openGjModal()">➕ नवीन गुरुजी जोडा</button>
+</div>
+
+<!-- ═══════════════════ RASHI ═══════════════════ -->
+<div class="page" id="page-rashi">
+  <p class="sec-title">🌙 दैनिक राशिभविष्य</p>
+  <div class="card card-o" style="text-align:center;padding:10px;margin-bottom:12px">
+    <p style="font-size:12px;font-weight:700;color:var(--maroon)" id="rashiDateBar">—</p>
+  </div>
+  <div class="rashi-grid" id="rashiGrid">
+    <div class="rashi-item" onclick="showRashi(0)"><div class="r-sym">♈</div><div class="r-name">मेष</div><div class="r-eng">Aries</div></div>
+    <div class="rashi-item" onclick="showRashi(1)"><div class="r-sym">♉</div><div class="r-name">वृषभ</div><div class="r-eng">Taurus</div></div>
+    <div class="rashi-item" onclick="showRashi(2)"><div class="r-sym">♊</div><div class="r-name">मिथुन</div><div class="r-eng">Gemini</div></div>
+    <div class="rashi-item" onclick="showRashi(3)"><div class="r-sym">♋</div><div class="r-name">कर्क</div><div class="r-eng">Cancer</div></div>
+    <div class="rashi-item" onclick="showRashi(4)"><div class="r-sym">♌</div><div class="r-name">सिंह</div><div class="r-eng">Leo</div></div>
+    <div class="rashi-item" onclick="showRashi(5)"><div class="r-sym">♍</div><div class="r-name">कन्या</div><div class="r-eng">Virgo</div></div>
+    <div class="rashi-item" onclick="showRashi(6)"><div class="r-sym">♎</div><div class="r-name">तूळ</div><div class="r-eng">Libra</div></div>
+    <div class="rashi-item" onclick="showRashi(7)"><div class="r-sym">♏</div><div class="r-name">वृश्चिक</div><div class="r-eng">Scorpio</div></div>
+    <div class="rashi-item" onclick="showRashi(8)"><div class="r-sym">♐</div><div class="r-name">धनु</div><div class="r-eng">Sagittarius</div></div>
+    <div class="rashi-item" onclick="showRashi(9)"><div class="r-sym">♑</div><div class="r-name">मकर</div><div class="r-eng">Capricorn</div></div>
+    <div class="rashi-item" onclick="showRashi(10)"><div class="r-sym">♒</div><div class="r-name">कुंभ</div><div class="r-eng">Aquarius</div></div>
+    <div class="rashi-item" onclick="showRashi(11)"><div class="r-sym">♓</div><div class="r-name">मीन</div><div class="r-eng">Pisces</div></div>
+  </div>
+
+  <div class="rashi-detail" id="rashiDetail">
+    <div class="card card-o">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span id="rSym" style="font-size:34px"></span>
+        <div><h3 id="rName" style="font-size:16px;font-weight:800;color:var(--maroon)"></h3><p id="rDates" style="font-size:10px;color:var(--mid)"></p></div>
+      </div>
+      <div class="divider"></div>
+      <p style="font-size:13px;font-weight:700;color:var(--saf);margin-bottom:4px" id="rScore"></p>
+      <p id="rDesc" style="font-size:12px;line-height:1.8;margin:8px 0"></p>
+      <div class="lucky-grid">
+        <div class="lucky-item"><div class="lucky-lbl">🔢 शुभ अंक</div><div class="lucky-val" id="rNum"></div></div>
+        <div class="lucky-item"><div class="lucky-lbl">🎨 शुभ रंग</div><div class="lucky-val" id="rColor"></div></div>
+        <div class="lucky-item"><div class="lucky-lbl">💎 शुभ रत्न</div><div class="lucky-val" id="rGem"></div></div>
+        <div class="lucky-item"><div class="lucky-lbl">📅 शुभ दिवस</div><div class="lucky-val" id="rDay"></div></div>
+        <div class="lucky-item"><div class="lucky-lbl">🌸 शुभ देवता</div><div class="lucky-val" id="rDev"></div></div>
+        <div class="lucky-item"><div class="lucky-lbl">⚡ ग्रह</div><div class="lucky-val" id="rPlanet"></div></div>
+      </div>
+      <div class="gb-grid">
+        <div class="g-box"><h4>✅ शुभ / फायदे</h4><ul id="rGood"></ul></div>
+        <div class="b-box"><h4>⚠️ काळजी</h4><ul id="rBad"></ul></div>
+      </div>
+      <div style="margin-top:10px;background:#F3E5F5;border-radius:10px;padding:10px;border-left:4px solid #9C27B0">
+        <p style="font-size:11px;font-weight:700;color:#6A1B9A;margin-bottom:4px">🕉️ आजचा उपाय</p>
+        <p id="rUpay" style="font-size:12px;line-height:1.7;color:var(--txt)"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ KUNDALI ═══════════════════ -->
+<div class="page" id="page-kundali">
+  <p class="sec-title">📜 जन्म कुंडली</p>
+  <div class="card">
+    <div class="k-form">
+      <div class="fg"><label>👤 पूर्ण नाव *</label><input id="kN" type="text" placeholder="संपूर्ण नाव"></div>
+      <div class="fg"><label>📅 जन्म तारीख *</label><input id="kD" type="date"></div>
+      <div class="fg"><label>🕐 जन्म वेळ</label><input id="kT" type="time"></div>
+      <div class="fg"><label>📍 जन्म ठिकाण *</label><input id="kP" type="text" placeholder="गाव / शहर, राज्य"></div>
+      <div class="fg"><label>⚧ लिंग</label><select id="kG"><option value="">निवडा</option><option value="male">पुरुष</option><option value="female">स्त्री</option></select></div>
+      <div class="fg"><label>📝 प्रश्न / समस्या</label><textarea id="kQ" rows="2" placeholder="ज्योतिषाशी संबंधित प्रश्न (ऐच्छिक)"></textarea></div>
+      <button class="sub-btn" onclick="genKundali()">🔱 कुंडली तयार करा</button>
+    </div>
+  </div>
+
+  <div class="k-chart-wrap" id="kResult">
+    <p class="sec-title" id="kTitle">📜 कुंडली</p>
+    <div class="k-grid">
+      <div class="kc"><div class="pl">☿</div><div>बुध</div><div style="font-size:7px;color:var(--saf)">3 मिथुन</div></div>
+      <div class="kc" style="background:#FFF3E0"></div><div class="kc" style="background:#FFF3E0"></div>
+      <div class="kc"><div class="pl">♀</div><div>शुक्र</div><div style="font-size:7px;color:var(--saf)">2 वृषभ</div></div>
+      <div class="kc"><div class="pl">♄</div><div>शनी</div><div style="font-size:7px;color:#1565C0">11 कुंभ</div></div>
+      <div class="kc center" style="grid-column:span 2;grid-row:span 2">
+        <div style="font-size:13px">🕉️</div>
+        <div id="kCN" style="font-size:9px;font-weight:700;color:var(--maroon);margin-top:2px"></div>
+        <div id="kCD" style="font-size:8px;color:var(--saf)"></div>
+        <div id="kCL" style="font-size:8px;color:var(--mid);margin-top:2px"></div>
+      </div>
+      <div class="kc"><div class="pl">🌙</div><div>चंद्र</div><div style="font-size:7px;color:var(--saf)">4 कर्क</div></div>
+      <div class="kc"><div class="pl">☊</div><div>राहू</div><div style="font-size:7px;color:#4A148C">8 वृश्चिक</div></div>
+      <div class="kc"><div class="pl">♂</div><div>मंगळ</div><div style="font-size:7px;color:var(--red)">1 मेष</div></div>
+      <div class="kc"><div class="pl">☽</div><div>केतु</div><div style="font-size:7px;color:#4A148C">2 वृषभ</div></div>
+      <div class="kc"><div class="pl">♃</div><div>गुरू</div><div style="font-size:7px;color:#E65100">9 धनु</div></div>
+      <div class="kc"><div class="pl">☉</div><div>सूर्य</div><div style="font-size:7px;color:var(--saf)">5 सिंह</div></div>
+    </div>
+
+    <p class="sec-title">🪐 ग्रह विश्लेषण</p>
+    <table class="planet-table">
+      <tr><th>ग्रह</th><th>राशी</th><th>भाव</th><th>स्थिती</th></tr>
+      <tbody id="planetTbody"></tbody>
+    </table>
+
+    <p class="sec-title" style="margin-top:14px">🔮 दोष विश्लेषण</p>
+    <div class="card card-g" id="doshaResult"></div>
+
+    <p class="sec-title">📊 कुंडली विश्लेषण</p>
+    <div class="card card-o" id="kAnalysis"></div>
+
+    <a href="tel:9969483437" class="call-btn" style="display:flex;margin-top:10px">📞 तज्ञ सल्ल्यासाठी गुरुजींशी संपर्क करा</a>
+  </div>
+
+  <div class="divider"></div>
+  <p class="sec-title">📖 भाव माहिती</p>
+  <div class="tip-card" style="font-size:11px;line-height:2">
+    <strong>🏠 12 भाव (Houses):</strong><br>
+    1. लग्न – स्वभाव, व्यक्तिमत्व &nbsp; 2. धन – संपत्ती, कुटुंब<br>
+    3. सहोदर – भाऊ-बहीण &nbsp; 4. सुख – घर, माता<br>
+    5. पुत्र – मुले, बुद्धिमत्ता &nbsp; 6. शत्रु – रोग, सेवा<br>
+    7. विवाह – जोडीदार &nbsp; 8. मृत्यू – आयुष्य, वारसा<br>
+    9. भाग्य – पिता, धर्म &nbsp; 10. कर्म – व्यवसाय<br>
+    11. लाभ – आमदनी, मित्र &nbsp; 12. व्यय – खर्च, मोक्ष
+  </div>
+</div>
+
+<!-- ═══════════════════ CALENDAR / PANCHANG ═══════════════════ -->
+<div class="page" id="page-calendar">
+  <p class="sec-title">📅 पंचांग कॅलेंडर</p>
+  <div class="cal-header">
+    <button class="cal-nav" onclick="calNav(-1)">‹</button>
+    <div class="cal-title" id="calTitle"></div>
+    <button class="cal-nav" onclick="calNav(1)">›</button>
+  </div>
+  <div class="cal-grid" id="calGrid"></div>
+
+  <div class="card card-o" id="selDayCard" style="display:none">
+    <p style="font-size:13px;font-weight:700;color:var(--maroon);margin-bottom:8px" id="selDayTitle"></p>
+    <p style="font-size:12px;line-height:1.9" id="selDayInfo"></p>
+  </div>
+
+  <p class="sec-title">🌅 आजचे पंचांग</p>
+  <div class="panch-grid">
+    <div class="panch-item"><div class="panch-icon">🌅</div><div class="panch-lbl">तिथी</div><div class="panch-val" id="pp1">—</div></div>
+    <div class="panch-item"><div class="panch-icon">⭐</div><div class="panch-lbl">नक्षत्र</div><div class="panch-val" id="pp2">—</div></div>
+    <div class="panch-item"><div class="panch-icon">📐</div><div class="panch-lbl">योग</div><div class="panch-val" id="pp3">—</div></div>
+    <div class="panch-item"><div class="panch-icon">🌀</div><div class="panch-lbl">करण</div><div class="panch-val" id="pp4">—</div></div>
+    <div class="panch-item"><div class="panch-icon">🌞</div><div class="panch-lbl">सूर्योदय</div><div class="panch-val" id="pp5">—</div></div>
+    <div class="panch-item"><div class="panch-icon">🌆</div><div class="panch-lbl">सूर्यास्त</div><div class="panch-val" id="pp6">—</div></div>
+    <div class="panch-item"><div class="panch-icon">🌙</div><div class="panch-lbl">चंद्रोदय</div><div class="panch-val" id="pp7">—</div></div>
+    <div class="panch-item"><div class="panch-icon">⚠️</div><div class="panch-lbl">राहुकाल</div><div class="panch-val" id="pp8">—</div></div>
+  </div>
+
+  <p class="sec-title">✨ आजचे शुभ मुहूर्त</p>
+  <div class="card card-g" id="muhurtCard"></div>
+
+  <p class="sec-title">🔔 व्रत व सण</p>
+  <div class="tip-card" id="festCard"></div>
+</div>
+
+<!-- ═══════════════════ PUJA BOOKING (with Backend) ═══════════════════ -->
+<div class="page" id="page-puja">
+
+  <!-- Main Tab Switcher -->
+  <div class="puja-main-tabs">
+    <button class="puja-main-tab active" id="pujaTabUser" onclick="switchPujaTab('user')">🙏 Puja Booking</button>
+    <button class="puja-main-tab" id="pujaTabGj" onclick="switchPujaTab('guruji')">👳 Guruji Dashboard</button>
+  </div>
+
+  <!-- ══ USER PANEL ══ -->
+  <div id="pujaUserPanel">
+    <div class="type-tabs" id="pujaTypeTabs">
+      <div class="type-tab active-tab" onclick="setPujaType(this,'booking')">📅 Booking</div>
+      <div class="type-tab" onclick="setPujaType(this,'request')">🙏 Request</div>
+      <div class="type-tab" onclick="setPujaType(this,'archana')">🌸 Archana</div>
+      <div class="type-tab" onclick="setPujaType(this,'seva')">🕉️ Seva</div>
+    </div>
+    <div class="card card-g" id="pujaTypeDesc" style="margin-bottom:12px;font-size:12px;line-height:1.8"></div>
+
+    <p class="sec-title">🪔 पूजा निवडा</p>
+    <div class="puja-grid" id="pujaGrid"></div>
+
+    <div class="booking-form show" id="bookingForm">
+      <p class="sec-title">📋 बुकिंग फॉर्म</p>
+      <div class="card">
+        <div class="k-form">
+          <div class="fg"><label>👤 नाव *</label><input id="bName" type="text" placeholder="आपले पूर्ण नाव"></div>
+          <div class="fg"><label>📞 मोबाईल *</label><input id="bPhone" type="tel" placeholder="10 अंकी नंबर"></div>
+          <div class="fg"><label>📅 पूजेची तारीख *</label><input id="bDate" type="date"></div>
+          <div class="fg"><label>🕐 वेळ</label><input id="bTime" type="time"></div>
+          <div class="fg"><label>📍 ठिकाण</label><input id="bLoc" type="text" placeholder="घर / मंदिर / पत्ता"></div>
+          <div class="fg"><label>📝 विशेष सूचना</label><textarea id="bNote" rows="2" placeholder="कोणतीही विशेष माहिती..."></textarea></div>
+          <div class="fg"><label>🔱 निवडलेली पूजा</label><input id="bPuja" type="text" placeholder="वरून पूजा निवडा" readonly style="background:#FFE0B2"></div>
+          <button class="sub-btn" onclick="bookPuja()">✅ Request पाठवा</button>
+        </div>
+      </div>
+    </div>
+
+    <p class="sec-title">📋 माझ्या Requests</p>
+    <div id="bookingsList"><p style="font-size:12px;color:var(--mid);text-align:center;padding:10px">अद्याप कोणतीही Request नाही</p></div>
+  </div>
+
+  <!-- ══ GURUJI PANEL ══ -->
+  <div id="pujaGjPanel" style="display:none">
+
+    <!-- ════ LOGIN SCREEN ════ -->
+    <div id="gjLoginScreen">
+      <div style="max-width:380px;margin:0 auto;padding:8px">
+
+        <!-- STEP 1 — Phone Entry -->
+        <div id="gjStepPhone">
+          <div style="text-align:center;padding:24px 0 20px">
+            <div style="width:80px;height:80px;background:linear-gradient(135deg,#FF6B00,#FFB300);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;margin:0 auto 12px;box-shadow:0 8px 24px rgba(255,107,0,.4)">👳</div>
+            <div style="font-size:20px;font-weight:800;color:var(--maroon);font-family:'Tiro Devanagari Sanskrit',serif">गुरुजी Dashboard</div>
+            <div style="font-size:11px;color:var(--mid);margin-top:6px;background:#FFF3E0;display:inline-block;padding:4px 14px;border-radius:20px;border:1px solid #FFB300">📱 फक्त मोबाईल नंबरने Login करा</div>
+          </div>
+          <div style="background:#fff;border-radius:20px;border:2px solid #FFE0B2;box-shadow:0 8px 32px rgba(255,107,0,.12);padding:22px">
+
+            <!-- Photo upload circle -->
+            <div style="text-align:center;margin-bottom:18px">
+              <div style="position:relative;display:inline-block">
+                <div id="gjLoginPhotoCircle" onclick="document.getElementById('gjLoginPhotoInput').click()"
+                  style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#FF6B00,#FFB300);border:3px solid #FFE0B2;display:flex;align-items:center;justify-content:center;font-size:34px;cursor:pointer;overflow:hidden;box-shadow:0 4px 16px rgba(255,107,0,.3);transition:.2s;margin:0 auto">
+                  <span id="gjLoginPhotoEmoji">👳</span>
+                  <img id="gjLoginPhotoImg" src="" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%">
+                </div>
+                <div onclick="document.getElementById('gjLoginPhotoInput').click()"
+                  style="position:absolute;bottom:2px;right:2px;width:24px;height:24px;background:#FF6B00;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid #fff;font-size:12px;box-shadow:0 2px 6px rgba(0,0,0,.2)">📷</div>
+              </div>
+              <input type="file" id="gjLoginPhotoInput" accept="image/*" style="display:none" onchange="gjHandlePhotoUpload(this)">
+              <div style="font-size:10px;color:var(--mid);margin-top:6px">फोटो टाका (ऐच्छिक)</div>
+            </div>
+
+            <!-- Name field -->
+            <div style="font-size:12px;font-weight:700;color:var(--mid);margin-bottom:6px">👤 आपले नाव *</div>
+            <input id="gjNameInput" type="text" placeholder="आपले पूर्ण नाव टाका"
+              style="width:100%;padding:11px 14px;border:2px solid #FFB300;border-radius:12px;font-size:14px;font-weight:600;background:#FFFDE7;outline:none;color:var(--maroon);font-family:inherit;transition:.2s;box-sizing:border-box;margin-bottom:14px"
+              oninput="gjNameChanged(this)"
+              onkeydown="if(event.key==='Enter')document.getElementById('gjPhoneInput').focus()">
+
+            <!-- Phone field -->
+            <div style="font-size:12px;font-weight:700;color:var(--mid);margin-bottom:6px">📞 आपला मोबाईल नंबर *</div>
+            <div style="display:flex;gap:8px;margin-bottom:6px">
+              <div style="background:linear-gradient(135deg,#FFF3E0,#FFFDE7);border:2px solid #FFB300;border-radius:12px;padding:12px 14px;font-size:13px;font-weight:800;color:var(--maroon);flex-shrink:0">🇮🇳 +91</div>
+              <input id="gjPhoneInput" type="tel" placeholder="10 अंकी नंबर" maxlength="10"
+                style="flex:1;padding:12px 14px;border:2px solid #FFB300;border-radius:12px;font-size:16px;font-weight:700;background:#FFFDE7;outline:none;color:var(--maroon);letter-spacing:2px;font-family:inherit;transition:.2s"
+                oninput="this.value=this.value.replace(/\D/g,'').slice(0,10);gjPhoneChanged(this)"
+                onkeydown="if(event.key==='Enter')gjSendOtp()">
+            </div>
+            <div id="gjPhoneHint" style="font-size:10px;color:var(--mid);margin-bottom:14px;min-height:16px"></div>
+            <button class="sub-btn" onclick="gjSendOtp()" id="gjSendOtpBtn" style="font-size:14px">📲 OTP पाठवा</button>
+          </div>
+          <div style="text-align:center;margin-top:14px;font-size:10px;color:#bbb">कोणताही 10-अंकी मोबाईल नंबर वापरा • OTP आपल्या नंबरवर येईल</div>
+        </div>
+
+        <!-- STEP 2 — OTP Entry -->
+        <div id="gjStepOtp" style="display:none">
+          <div style="text-align:center;padding:24px 0 20px">
+            <div style="width:80px;height:80px;background:linear-gradient(135deg,#1565C0,#1976D2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;margin:0 auto 12px;box-shadow:0 8px 24px rgba(21,101,192,.4)">🔐</div>
+            <div style="font-size:20px;font-weight:800;color:var(--maroon);font-family:'Tiro Devanagari Sanskrit',serif">OTP पडताळणी</div>
+            <div id="gjOtpSentTo" style="font-size:11px;color:var(--mid);margin-top:6px"></div>
+          </div>
+          <div style="background:#fff;border-radius:20px;border:2px solid #FFE0B2;box-shadow:0 8px 32px rgba(255,107,0,.12);padding:22px">
+            <!-- SMS preview bubble -->
+            <div id="gjSmsBubble" style="background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:1.5px solid #A5D6A7;border-radius:14px;padding:12px 14px;margin-bottom:16px;display:none">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+                <span style="background:#25D366;color:#fff;font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px">SMS</span>
+                <span style="font-size:10px;font-weight:700;color:#2E7D32">ShivShakti Jyotish Kendra</span>
+              </div>
+              <div id="gjSmsBubbleText" style="font-size:12px;color:#1B5E20;font-weight:600;line-height:1.8;white-space:pre-line"></div>
+            </div>
+            <!-- 4 OTP boxes -->
+            <div style="font-size:12px;font-weight:700;color:var(--mid);margin-bottom:12px;text-align:center">4-अंकी OTP टाका</div>
+            <div style="display:flex;justify-content:center;gap:12px;margin-bottom:10px">
+              <input type="tel" maxlength="1" class="gjOtpBox" id="gjob0" oninput="gjOtpIn(0)" onkeydown="gjOtpKey(event,0)">
+              <input type="tel" maxlength="1" class="gjOtpBox" id="gjob1" oninput="gjOtpIn(1)" onkeydown="gjOtpKey(event,1)">
+              <input type="tel" maxlength="1" class="gjOtpBox" id="gjob2" oninput="gjOtpIn(2)" onkeydown="gjOtpKey(event,2)">
+              <input type="tel" maxlength="1" class="gjOtpBox" id="gjob3" oninput="gjOtpIn(3)" onkeydown="gjOtpKey(event,3)">
+            </div>
+            <div id="gjOtpErr" style="color:#B71C1C;font-size:11px;text-align:center;min-height:18px;margin-bottom:6px"></div>
+            <div style="text-align:center;margin-bottom:14px">
+              <span id="gjTimerTxt" style="font-size:11px;color:var(--mid)"></span>
+              <button id="gjResendBtn" onclick="gjResendOtp()" style="display:none;background:none;border:none;color:var(--saf);font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:underline">🔄 OTP पुन्हा पाठवा</button>
+            </div>
+            <button class="sub-btn" onclick="gjVerifyOtp()">✅ Verify & Login</button>
+            <button onclick="gjBackToPhone()" style="width:100%;margin-top:8px;background:transparent;border:2px solid #FFB300;border-radius:12px;padding:11px;font-size:13px;font-weight:700;color:var(--saf);cursor:pointer;font-family:inherit">← मागे जा</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ════ DASHBOARD (after login) ════ -->
+    <div id="gjDashboard" style="display:none">
+
+      <!-- Dashboard Header -->
+      <div style="background:linear-gradient(135deg,#7B1B00,#D45500,#FF6B00);border-radius:18px;padding:16px;margin-bottom:14px;position:relative;overflow:hidden;box-shadow:0 6px 24px rgba(255,107,0,.35)">
+        <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:rgba(255,255,255,.06);border-radius:50%"></div>
+        <div style="position:absolute;bottom:-30px;right:30px;width:70px;height:70px;background:rgba(255,179,0,.1);border-radius:50%"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2">
+          <div style="display:flex;align-items:center;gap:12px">
+            <!-- DP with photo + edit button -->
+            <div style="position:relative;flex-shrink:0">
+              <div id="gjDashAvatar" onclick="document.getElementById('gjDashPhotoInput').click()"
+                style="width:58px;height:58px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;border:2.5px solid rgba(255,255,255,.6);overflow:hidden;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.25);transition:.2s">
+                <span id="gjDashAvatarEmoji">👳</span>
+                <img id="gjDashAvatarImg" src="" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%">
+              </div>
+              <div onclick="document.getElementById('gjDashPhotoInput').click()"
+                style="position:absolute;bottom:0;right:0;width:20px;height:20px;background:#FFD700;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid #fff;font-size:10px;box-shadow:0 1px 4px rgba(0,0,0,.3)">✏️</div>
+              <input type="file" id="gjDashPhotoInput" accept="image/*" style="display:none" onchange="gjHandleDashPhoto(this)">
+            </div>
+            <div>
+              <div style="font-size:15px;font-weight:800;color:#fff" id="gjDashName">👳 गुरुजी</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.85);margin-top:2px" id="gjDashPhone"></div>
+              <div style="display:inline-block;background:rgba(255,255,255,.2);border-radius:10px;padding:2px 8px;font-size:9px;color:#FFD700;font-weight:700;margin-top:3px">● Online</div>
+            </div>
+          </div>
+          <button onclick="gjLogout()" style="background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.4);border-radius:10px;padding:7px 14px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;backdrop-filter:blur(4px)">🚪 Logout</button>
+        </div>
+      </div>
+
+      <!-- SMS API Settings -->
+      <div id="smsSettingsPanel" style="display:none;background:#FFF3E0;border:1.5px solid #FFB300;border-radius:14px;padding:14px;margin-bottom:12px">
+        <div style="font-weight:800;font-size:13px;color:var(--maroon);margin-bottom:10px">📱 Fast2SMS API Key सेट करा</div>
+        <div style="font-size:11px;color:var(--mid);margin-bottom:8px;line-height:1.8;background:#FFFDE7;border-radius:8px;padding:10px">
+          1. <a href="https://www.fast2sms.com" target="_blank" style="color:#FF6B00;font-weight:700">fast2sms.com</a> वर free account बनवा<br>
+          2. Dashboard → Dev API → API Key copy करा<br>
+          3. खाली paste करा → Save करा
+        </div>
+        <input id="smsApiKeyInput" type="text" placeholder="Fast2SMS API Key paste करा..." style="width:100%;padding:9px 12px;border:1.5px solid #FFB300;border-radius:10px;font-size:12px;background:#FFFDE7;outline:none;color:#2C1810;font-family:inherit;box-sizing:border-box;margin-bottom:8px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <button onclick="saveSmsApiKey()" style="background:linear-gradient(135deg,#FF6B00,#D45500);color:#fff;border:none;border-radius:9px;padding:9px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">💾 Save करा</button>
+          <button onclick="testSmsApi()" style="background:linear-gradient(135deg,#1565C0,#0D47A1);color:#fff;border:none;border-radius:9px;padding:9px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">🧪 Test SMS</button>
+        </div>
+        <div id="smsApiStatus" style="font-size:11px;margin-top:8px;text-align:center"></div>
+      </div>
+
+      <!-- SMS Status Row -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;background:#FFF8E1;border-radius:12px;padding:10px 12px;border:1px solid #FFE0B2">
+        <div style="font-size:11px;color:var(--mid)">📱 SMS: <span id="smsActiveLabel" style="font-weight:700;color:#B71C1C">API Key नाही</span></div>
+        <button onclick="toggleSmsSettings()" style="background:linear-gradient(135deg,#FF6B00,#D45500);border:none;border-radius:8px;padding:5px 12px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;font-family:inherit">⚙️ SMS Setup</button>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stat-grid" style="margin-bottom:14px">
+        <div class="stat-box" style="background:linear-gradient(135deg,#FFF8E1,#FFF3E0);border:1.5px solid #FFB300">
+          <div class="stat-num" id="statPending" style="color:#E65100">0</div>
+          <div class="stat-lbl" style="color:#E65100">⏳ Pending</div>
+        </div>
+        <div class="stat-box" style="background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:1.5px solid #81C784">
+          <div class="stat-num" id="statAccepted" style="color:#1B5E20">0</div>
+          <div class="stat-lbl" style="color:#1B5E20">✅ Accepted</div>
+        </div>
+        <div class="stat-box" style="background:linear-gradient(135deg,#FFEBEE,#FFF5F5);border:1.5px solid #EF9A9A">
+          <div class="stat-num" id="statRejected" style="color:#B71C1C">0</div>
+          <div class="stat-lbl" style="color:#B71C1C">❌ Rejected</div>
+        </div>
+      </div>
+
+      <!-- AI Analysis Panel -->
+      <div class="ai-panel" style="margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <div style="font-weight:800;font-size:13px;color:#6A1B9A">🤖 AI Request Analysis</div>
+          <button class="ai-analyze-btn" onclick="gjAiAnalyze()">✨ Analyze</button>
+        </div>
+        <div id="gjAiResult" style="font-size:12px;color:#4A148C;line-height:1.8">Analyze बटण दाबा — AI सर्व requests तपासेल</div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-tabs">
+        <button class="ftab on" onclick="gjFilter(this,'pending')">⏳ Pending</button>
+        <button class="ftab" onclick="gjFilter(this,'accepted')">✅ Accepted</button>
+        <button class="ftab" onclick="gjFilter(this,'rejected')">❌ Rejected</button>
+        <button class="ftab" onclick="gjFilter(this,'all')">📋 All</button>
+      </div>
+
+      <!-- Requests List -->
+      <div id="gjRequestsList"></div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════ MANTRA ═══════════════════ -->
+<div class="page" id="page-mantra">
+  <div id="mantraCatView">
+    <p class="sec-title">🎵 मंत्र संग्रह</p>
+    <div class="mantra-cat-grid" id="mantraCatGrid"></div>
+  </div>
+  <div class="mantra-detail" id="mantraDetailView">
+    <button class="back-btn" onclick="backMantra()">← परत जा</button>
+    <div id="mantraContent"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════ AARTI ═══════════════════ -->
+<div class="page" id="page-aarti">
+  <div id="aartiCatView">
+    <p class="sec-title">🪔 आरती संग्रह</p>
+    <div class="mantra-cat-grid" id="aartiCatGrid"></div>
+  </div>
+  <div class="mantra-detail" id="aartiDetailView">
+    <button class="back-btn" onclick="backAarti()">← परत जा</button>
+    <div id="aartiContent"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════ YOGA JOURNAL ═══════════════════ -->
+<div class="page" id="page-yoga">
+  <p class="sec-title">🧘 योग जर्नल</p>
+  <div class="card">
+    <div class="k-form">
+      <div class="fg"><label>📅 तारीख</label><input id="yDate" type="date"></div>
+      <div class="fg"><label>🧘 योगासन / ध्यान</label><input id="yPractice" type="text" placeholder="उदा. सूर्य नमस्कार, ध्यान, प्राणायाम"></div>
+      <div class="fg"><label>⏱ कालावधी (मिनिटे)</label><input id="yDur" type="number" placeholder="30"></div>
+      <div class="fg"><label>🌸 मनाची अवस्था</label><select id="yMood"><option value="">निवडा</option><option>😊 उत्साही</option><option>😌 शांत</option><option>😔 उदास</option><option>😤 तणावग्रस्त</option><option>🥰 आनंदी</option></select></div>
+      <div class="fg"><label>📝 नोंद</label><textarea id="yNote" rows="2" placeholder="आजच्या साधनेबद्दल..."></textarea></div>
+      <button class="sub-btn" onclick="saveYoga()">💾 नोंद जतन करा</button>
+    </div>
+  </div>
+
+  <p class="sec-title">📖 माझ्या नोंदी</p>
+  <div id="yogaEntries"><p style="font-size:12px;color:var(--mid);text-align:center;padding:10px">अद्याप कोणती नोंद नाही</p></div>
+
+  <p class="sec-title">🕉️ दैनिक योग मार्गदर्शन</p>
+  <div class="tip-card">
+    <strong>🌅 सकाळचा क्रम:</strong><br>
+    1. ब्राह्म मुहूर्त (04:30) – जागे व्हा<br>
+    2. नित्य कर्म व स्नान<br>
+    3. सूर्य नमस्कार (12 फेऱ्या)<br>
+    4. प्राणायाम (अनुलोम-विलोम, भस्त्रिका)<br>
+    5. ध्यान / मंत्र जप (108 वेळा)<br>
+    6. योगासन (1 तास)<br>
+    7. देव पूजा व आरती
+  </div>
+
+  <p class="sec-title">🌬️ प्राणायाम मार्गदर्शन</p>
+  <div class="card card-g">
+    <p style="font-size:12px;line-height:2">
+      <strong>1. अनुलोम-विलोम:</strong> नाडीशोधन, 10 मिनिटे<br>
+      <strong>2. भस्त्रिका:</strong> शक्ती वाढवतो, 5 मिनिटे<br>
+      <strong>3. कपालभाती:</strong> विषारी पदार्थ बाहेर, 10 मिनिटे<br>
+      <strong>4. उज्जायी:</strong> मन शांत करतो, 5 मिनिटे<br>
+      <strong>5. भ्रामरी:</strong> तणाव कमी, 5 मिनिटे
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════ SERVICES ═══════════════════ -->
+<div class="page" id="page-services">
+  <div id="svcListView">
+    <p class="sec-title">🌟 आमच्या सेवा</p>
+    <div class="service-grid" id="svcGrid"></div>
+    <a href="tel:9969483437" class="call-btn" style="display:flex;margin-top:14px">📞 सर्व सेवांसाठी संपर्क: 9969483437</a>
+    <a href="https://wa.me/919969483437" class="call-btn wa-btn" target="_blank" style="display:flex;margin-top:6px">💬 WhatsApp वर बुक करा</a>
+  </div>
+  <div class="svc-detail" id="svcDetailView">
+    <button class="back-btn" onclick="backSvc()">← परत जा</button>
+    <div id="svcDetailContent"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════ TEMPLE ═══════════════════ -->
+<div class="page" id="page-temple">
+  <p class="sec-title">🛕 वर्चुअल मंदिर</p>
+  <p class="sec-sub">देव निवडा आणि पूजा करा</p>
+
+  <!-- God selection grid -->
+  <div class="temple-god-grid" id="templeGodGrid"></div>
+
+  <!-- Virtual Temple Stage -->
+  <div class="vtemple-wrap" id="vtempleWrap">
+
+    <div class="vtemple-stage" id="vtempleStage">
+      <div class="temple-arch"></div>
+      <div class="temple-arch2"></div>
+      <!-- Flower particles container -->
+      <div class="flower-container" id="flowerContainer"></div>
+      <!-- God shrine -->
+      <div class="god-shrine">
+        <span class="god-main-emoji" id="godMainEmoji">🕉️</span>
+        <div class="god-shrine-name" id="godShrineName">देवाचे नाव</div>
+        <div class="god-shrine-mantra" id="godShrineMantra">मंत्र</div>
+      </div>
+      <!-- Diyas -->
+      <div class="diya-row">
+        <span class="diya">🪔</span>
+        <span class="diya">🪔</span>
+        <span class="diya">🕯️</span>
+        <span class="diya">🪔</span>
+        <span class="diya">🪔</span>
+      </div>
+      <!-- Aarti Plate (left side) -->
+      <div class="aarti-plate-wrap">
+        <span class="aarti-plate" id="aartiPlate">🪔</span>
+      </div>
+      <!-- Agarbatti (right side) -->
+      <div class="agarbatti-wrap" id="agarbattiWrap" style="opacity:0.4">
+        <div class="agarbatti-smoke" id="agarbattiSmoke"></div>
+        <div class="agarbatti-stick"></div>
+        <div class="agarbatti-tip"></div>
+      </div>
+    </div>
+
+    <!-- Control Buttons -->
+    <div class="temple-controls">
+      <div class="temple-ctrl-btn" id="btnFlowers" onclick="throwFlowers()">
+        <span class="ctrl-icon">🌸</span>
+        <span class="ctrl-label">फुले अर्पण</span>
+      </div>
+      <div class="temple-ctrl-btn" id="btnAarti" onclick="startAarti()">
+        <span class="ctrl-icon">🪔</span>
+        <span class="ctrl-label">आरती करा</span>
+      </div>
+      <div class="temple-ctrl-btn" id="btnAgarbatti" onclick="toggleAgarbatti()">
+        <span class="ctrl-icon">🕯️</span>
+        <span class="ctrl-label">अगरबत्ती</span>
+      </div>
+      <div class="temple-ctrl-btn" id="btnBell" onclick="ringBell()">
+        <span class="ctrl-icon" id="bellIcon">🔔</span>
+        <span class="ctrl-label">घंटा वाजवा</span>
+      </div>
+      <div class="temple-ctrl-btn" id="btnShankh" onclick="blowShankh()">
+        <span class="ctrl-icon" id="shankhIcon">🐚</span>
+        <span class="ctrl-label">शंख वाजवा</span>
+      </div>
+      <div class="temple-ctrl-btn" id="btnStop" onclick="stopAarti()" style="display:none">
+        <span class="ctrl-icon">⏹️</span>
+        <span class="ctrl-label">आरती थांबवा</span>
+      </div>
+    </div>
+
+    <!-- Aarti Lyrics Panel -->
+    <div class="aarti-panel" id="aartiPanel">
+      <div class="aarti-playing-badge">🎵 आरती सुरू आहे...</div>
+      <div class="aarti-panel-title" id="aartiPanelTitle">आरती</div>
+      <div class="aarti-panel-text" id="aartiPanelText"></div>
+    </div>
+  </div>
+
+  <!-- Prompt before selection -->
+  <div class="select-god-tip" id="selectGodTip" style="display:none">
+    <p>👆 वर देव निवडा आणि मंदिरात दर्शन घ्या</p>
+  </div>
+</div>
+
+<!-- FAB -->
+<button class="fab" onclick="openGjModal()" title="गुरुजी जोडा">➕</button>
+
+<!-- ADD GURUJI MODAL -->
+<div class="modal-overlay" id="gjModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeGjModal()">✕</button>
+    <h3>👳 गुरुजी जोडा</h3>
+    <div class="k-form">
+      <div class="fg"><label>👤 नाव *</label><input id="gN" type="text" placeholder="पूर्ण नाव"></div>
+      <div class="fg"><label>📞 मोबाईल *</label><input id="gPh" type="tel" placeholder="10 अंकी नंबर"></div>
+      <div class="fg"><label>📍 ठिकाण</label><input id="gLoc" type="text" placeholder="गाव / शहर"></div>
+      <div class="fg"><label>🎓 विशेषज्ञता</label>
+        <select id="gSp"><option>ज्योतिष तज्ञ</option><option>वास्तु विशारद</option><option>कुंडली विशारद</option><option>धार्मिक विधी</option><option>मंत्र-तंत्र</option><option>हस्तरेखा</option><option>वैदिक पुरोहित</option></select>
+      </div>
+      <div class="fg"><label>🏆 अनुभव (वर्षे)</label><input id="gEx" type="number" placeholder="15"></div>
+      <div class="fg"><label>📝 माहिती</label><input id="gDs" type="text" placeholder="विशेष सेवा माहिती"></div>
+      <button class="sub-btn" onclick="addGuruji()">✅ जोडा</button>
+    </div>
+  </div>
+</div>
+
+<!-- SMS Notification Toasts -->
+<div class="sms-toast-wrap" id="smsToastWrap"></div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ══ SMS SENT CONFIRMATION MODAL ══ -->
+<div class="sms-modal-overlay" id="smsSentModal">
+  <div class="sms-modal">
+    <div id="smsSentModalHeader" class="sms-modal-header-accept">
+      <span class="sms-modal-icon" id="smsSentModalIcon">✅</span>
+      <div class="sms-modal-title" id="smsSentModalTitle">Booking Accept झाली!</div>
+      <div class="sms-modal-subtitle" id="smsSentModalSubtitle">SMS पाठवला जात आहे...</div>
+    </div>
+    <div class="sms-modal-body">
+      <div class="sms-phone-chip">
+        <div class="sms-phone-chip-icon">📱</div>
+        <div class="sms-phone-chip-info">
+          <div class="sms-phone-chip-label">📨 SMS पाठवला → यांच्या नंबरवर</div>
+          <div class="sms-phone-chip-number" id="smsSentPhone">+91 XXXXXXXXXX</div>
+        </div>
+      </div>
+      <div class="sms-bubble">
+        <div class="sms-bubble-header">
+          <span class="sms-bubble-badge">SMS</span>
+          <span class="sms-bubble-sender">ShivShakti Jyotish Kendra</span>
+          <span class="sms-bubble-time" id="smsSentTime"></span>
+        </div>
+        <div class="sms-bubble-text" id="smsSentText"></div>
+      </div>
+      <div class="sms-modal-actions">
+        <button class="sms-whatsapp-btn" id="smsSentWaBtn" onclick="openSmsWhatsApp()">
+          💬 WhatsApp वर पाठवा
+        </button>
+        <button class="sms-close-btn" onclick="closeSmsModal()">
+          🙏 ठीक आहे
+        </button>
+      </div>
+      <div class="sms-api-note" id="smsSentApiNote"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════ DATA ═══════════════════
+const DAYS_MR=["रविवार","सोमवार","मंगळवार","बुधवार","गुरुवार","शुक्रवार","शनिवार"];
+const DAYS_EN=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const MONTHS_MR=["जानेवारी","फेब्रुवारी","मार्च","एप्रिल","मे","जून","जुलै","ऑगस्ट","सप्टेंबर","ऑक्टोबर","नोव्हेंबर","डिसेंबर"];
+const MONTHS_EN=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const TITHIS=["प्रतिपदा","द्वितीया","तृतीया","चतुर्थी","पंचमी","षष्ठी","सप्तमी","अष्टमी","नवमी","दशमी","एकादशी","द्वादशी","त्रयोदशी","चतुर्दशी","पौर्णिमा/अमावस्या"];
+const NAKSHATRAS=["अश्विनी","भरणी","कृत्तिका","रोहिणी","मृगशिरा","आर्द्रा","पुनर्वसू","पुष्य","आश्लेषा","मघा","पूर्वफाल्गुनी","उत्तरफाल्गुनी","हस्त","चित्रा","स्वाती","विशाखा","अनुराधा","ज्येष्ठा","मूळ","पूर्वाषाढा","उत्तराषाढा","श्रवण","धनिष्ठा","शतभिषा","पूर्वाभाद्रपद","उत्तराभाद्रपद","रेवती"];
+const YOGAS=["विष्कुंभ","प्रीती","आयुष्यमान","सौभाग्य","शोभन","अतिगण्ड","सुकर्मा","धृती","शूल","गण्ड","वृद्धि","ध्रुव","व्याघात","हर्षण","वज्र","सिद्धि","व्यातीपात","वरीयान","परिघ","शिव","सिद्ध","साध्य","शुभ","शुक्ल","ब्रह्म","इन्द्र","वैधृति"];
+const KARANS=["बव","बालव","कौलव","तैतिल","गर","वणिज","भद्रा"];
+const RAHU_MR={0:"04:30–06:00",1:"07:30–09:00",2:"15:00–16:30",3:"12:00–13:30",4:"13:30–15:00",5:"10:30–12:00",6:"09:00–10:30"};
+const SUNRISE=["06:18","06:12","06:05","05:55","05:44","05:38","05:40","05:48","05:58","06:08","06:17","06:22"];
+const SUNSET=["18:10","18:28","18:44","19:00","19:15","19:28","19:25","19:10","18:48","18:28","18:14","18:08"];
+
+const THOUGHTS=["🌸 सकाळी उठून देवाचे नाव घ्या – दिवस शुभ होईल.","🔱 कठीण परिस्थितीत शिवाचे स्मरण करा – शक्ती मिळेल.","🌞 प्रत्येक सूर्योदय नवीन संधी घेऊन येतो.","🕉️ ध्यान हेच खरे धन आहे.","🙏 कर्म करत राहा, फळाची अपेक्षा ठेवू नका.","💧 गंगेसारखे निर्मळ मन ठेवा.","🌺 दुसऱ्याचे भले करणे हीच खरी पूजा.","⭐ सत्य बोलण्याने देवाची कृपा होते.","🌙 रात्री झोपण्यापूर्वी देवाचे आभार माना.","🔔 मंदिरात गेल्यावर मनापासून प्रार्थना करा."];
+
+const RASHIS=[
+  {n:"मेष",sym:"♈",eng:"Aries",dates:"21 मार्च – 19 एप्रिल",planet:"मंगळ",dev:"हनुमान",num:"9",color:"लाल",gem:"माणिक",day:"मंगळवार",
+   score:"आजचा दिवस: ⭐⭐⭐⭐ (4/5)",
+   desc:"आज आत्मविश्वास उच्च असेल. नवीन कामाची सुरुवात करण्यासाठी हा दिवस अत्यंत शुभ आहे. कुटुंबात सुखद वातावरण असेल. आर्थिक बाबतीत सजगता बाळगा.",
+   good:["नवीन प्रकल्प यशस्वी होतील","कुटुंबाची साथ मिळेल","आरोग्य उत्तम राहील","व्यापारात नफा होईल"],
+   bad:["पैशांची उधळपट्टी टाळा","रागावर नियंत्रण ठेवा","घाई करू नका"],
+   upay:"आज हनुमान चालिसा वाचा. लाल फुले हनुमानजींना अर्पण करा. मंगळवारी लाल वस्त्र परिधान करा."},
+  {n:"वृषभ",sym:"♉",eng:"Taurus",dates:"20 एप्रिल – 20 मे",planet:"शुक्र",dev:"लक्ष्मी",num:"6",color:"हिरवा",gem:"पन्ना",day:"शुक्रवार",
+   score:"आजचा दिवस: ⭐⭐⭐⭐⭐ (5/5)",
+   desc:"आज संपत्तीसंबंधित अत्यंत चांगल्या बातम्या येतील. प्रेमसंबंधात गोडवा वाढेल. मित्रमंडळींची मदत होईल. नवीन गुंतवणुकीचा विचार करता येईल.",
+   good:["आर्थिक स्थिती मजबूत होईल","प्रेमसंबंधात सुख","मित्रांकडून मदत","सर्जनशीलता वाढेल"],
+   bad:["हट्टीपणा टाळा","आळस सोडा","जुन्या कर्जाची काळजी"],
+   upay:"आज लक्ष्मीदेवीची पूजा करा. हिरवा रंग वापरा. शुक्रवारी उपवास करा."},
+  {n:"मिथुन",sym:"♊",eng:"Gemini",dates:"21 मे – 20 जून",planet:"बुध",dev:"गणेश",num:"5",color:"पिवळा",gem:"पुष्कराज",day:"बुधवार",
+   score:"आजचा दिवस: ⭐⭐⭐⭐ (4/5)",
+   desc:"आज बुद्धी तीक्ष्ण असेल. संवाद कौशल्याने व्यापारात फायदा होईल. नवीन शिक्षणाची संधी येईल. भावंडांशी संबंध सुधारतील.",
+   good:["शिक्षणात यश मिळेल","व्यापारात नफा","बौद्धिक विकास","प्रवास शुभ होईल"],
+   bad:["दोन मनाचा विचार टाळा","जास्त बोलणे नको","लक्ष एकाग्र ठेवा"],
+   upay:"बुधवारी गणेशाची पूजा करा. हिरव्या मुगाचे दान करा. गणेश अथर्वशीर्ष पठण करा."},
+  {n:"कर्क",sym:"♋",eng:"Cancer",dates:"21 जून – 22 जुलै",planet:"चंद्र",dev:"दुर्गा",num:"2",color:"पांढरा",gem:"मोती",day:"सोमवार",
+   score:"आजचा दिवस: ⭐⭐⭐ (3/5)",
+   desc:"आज कुटुंबाशी संबंधित विषयांना महत्त्व येईल. मातेची कृपा मिळेल. घरात शांती राहील. भावनिक स्तरावर सकारात्मकता जाणवेल.",
+   good:["कुटुंबात आनंद","मातेचे आशीर्वाद","गृहकार्यात यश","भावनिक समाधान"],
+   bad:["जास्त भावनिक होऊ नका","काळजीचे प्रमाण कमी करा","इतरांवर जास्त अवलंबू नका"],
+   upay:"सोमवारी शिव पूजा करा. चंद्राला अर्घ्य द्या. पांढरे वस्त्र परिधान करा."},
+  {n:"सिंह",sym:"♌",eng:"Leo",dates:"23 जुलै – 22 ऑगस्ट",planet:"सूर्य",dev:"सूर्यनारायण",num:"1",color:"नारंगी",gem:"माणिक",day:"रविवार",
+   score:"आजचा दिवस: ⭐⭐⭐⭐⭐ (5/5)",
+   desc:"आज नेतृत्वाची उत्तम संधी मिळेल. समाजात मान-प्रतिष्ठा वाढेल. सरकारी कामे यशस्वी होतील. आत्मविश्वास उच्च ठेवा.",
+   good:["नेतृत्व संधी मिळेल","मान-प्रतिष्ठा वाढेल","सरकारी कामे होतील","यश निश्चित आहे"],
+   bad:["अहंकार टाळा","खर्चावर नियंत्रण ठेवा","इतरांचे ऐका"],
+   upay:"रविवारी सूर्याला अर्घ्य द्या. आदित्य हृदयम पठण करा. नारंगी रंग वापरा."},
+  {n:"कन्या",sym:"♍",eng:"Virgo",dates:"23 ऑगस्ट – 22 सप्टेंबर",planet:"बुध",dev:"विष्णू",num:"5",color:"हिरवा",gem:"पन्ना",day:"बुधवार",
+   score:"आजचा दिवस: ⭐⭐⭐⭐ (4/5)",
+   desc:"आज काम व्यवस्थित होईल. विश्लेषण क्षमता वाढेल. आरोग्याकडे लक्ष द्या. सेवाकार्यात आनंद मिळेल.",
+   good:["काम नीट होईल","विश्लेषण उत्तम","सेवाकार्यात यश","बचत वाढेल"],
+   bad:["जास्त टीका करू नका","आरोग्याकडे दुर्लक्ष नको","चिंता कमी करा"],
+   upay:"विष्णुसहस्त्रनाम पठण करा. तुळशीची पूजा करा. हिरव्या वस्तू दान करा."},
+  {n:"तूळ",sym:"♎",eng:"Libra",dates:"23 सप्टेंबर – 22 ऑक्टोबर",planet:"शुक्र",dev:"लक्ष्मी",num:"6",color:"निळा",gem:"हिरा",day:"शुक्रवार",
+   score:"आजचा दिवस: ⭐⭐⭐⭐ (4/5)",
+   desc:"आज समतोल राखणे महत्त्वाचे. न्यायप्रिय निर्णय घ्या. भागीदारी व्यवसायात फायदा. सामाजिक जीवन उत्तम राहील.",
+   good:["भागीदारीत फायदा","सामाजिक यश","न्यायपूर्ण निर्णय","सौंदर्यप्रियता वाढेल"],
+   bad:["निर्णय घेण्यास उशीर टाळा","आळस करू नका","खर्च नियंत्रित ठेवा"],
+   upay:"लक्ष्मी स्तोत्र पठण करा. निळे वस्त्र घाला. शुक्रवारी गोड दान करा."},
+  {n:"वृश्चिक",sym:"♏",eng:"Scorpio",dates:"23 ऑक्टोबर – 21 नोव्हेंबर",planet:"मंगळ",dev:"काली",num:"9",color:"लाल",gem:"मूंगा",day:"मंगळवार",
+   score:"आजचा दिवस: ⭐⭐⭐⭐ (4/5)",
+   desc:"आज गुप्त माहिती उपयोगी येईल. संशोधनात यश मिळेल. परिवर्तनाची वेळ आहे. मनोबल उच्च ठेवा.",
+   good:["गुप्त कामे होतील","संशोधनात यश","शक्ती वाढेल","आर्थिक लाभ"],
+   bad:["संशय टाळा","राग नियंत्रित ठेवा","प्रतिशोध टाळा"],
+   upay:"कालीमाता पूजा करा. लाल फुले अर्पण करा. मंगळवारी उपवास करा."},
+  {n:"धनु",sym:"♐",eng:"Sagittarius",dates:"22 नोव्हेंबर – 21 डिसेंबर",planet:"गुरू",dev:"दत्तात्रेय",num:"3",color:"पिवळा",gem:"पुष्कराज",day:"गुरुवार",
+   score:"आजचा दिवस: ⭐⭐⭐⭐⭐ (5/5)",
+   desc:"आज प्रवास किंवा शिक्षणाची उत्तम संधी. तत्त्वज्ञान व धर्मात रुची वाढेल. विदेशी संबंधातून फायदा. उत्साह उच्च राहील.",
+   good:["प्रवास शुभ होईल","शिक्षणात यश","आध्यात्मिक उन्नती","उत्साह वाढेल"],
+   bad:["जास्त आशावाद टाळा","वायफळ खर्च नको","वेळापत्रक पाळा"],
+   upay:"गुरुवारी गुरुजींची पूजा करा. पिवळे कपडे घाला. हळद दान करा."},
+  {n:"मकर",sym:"♑",eng:"Capricorn",dates:"22 डिसेंबर – 19 जानेवारी",planet:"शनी",dev:"शनिदेव",num:"8",color:"काळा/निळा",gem:"नीलम",day:"शनिवार",
+   score:"आजचा दिवस: ⭐⭐⭐ (3/5)",
+   desc:"आज कठोर परिश्रमाने यश मिळेल. व्यावसायिक जीवनात प्रगती होईल. वरिष्ठांकडून मान मिळेल. जबाबदारी नीट पार पाडा.",
+   good:["व्यावसायिक प्रगती","वरिष्ठांचा आदर","परिश्रमाचे फळ","संपत्ती वाढेल"],
+   bad:["जास्त कठोर होऊ नका","आनंद विसरू नका","अहंकार टाळा"],
+   upay:"शनिवारी शनिदेवाला तेल चढवा. काळे तीळ दान करा. शनि स्तोत्र पठण करा."},
+  {n:"कुंभ",sym:"♒",eng:"Aquarius",dates:"20 जानेवारी – 18 फेब्रुवारी",planet:"शनी",dev:"हनुमान",num:"4",color:"निळा",gem:"नीलम",day:"शनिवार",
+   score:"आजचा दिवस: ⭐⭐⭐⭐ (4/5)",
+   desc:"आज नवीन विचार व कल्पना येतील. मित्रांकडून मदत होईल. सामाजिक कार्यात यश. तंत्रज्ञानाशी संबंधित फायदा होईल.",
+   good:["नवीन कल्पना येतील","मित्रांची साथ","सामाजिक कार्यात यश","तांत्रिक फायदा"],
+   bad:["वास्तवापासून दूर जाऊ नका","हटवाद टाळा","अव्यवहारी विचार नको"],
+   upay:"हनुमान चालिसा वाचा. निळे वस्त्र घाला. गरिबांना अन्नदान करा."},
+  {n:"मीन",sym:"♓",eng:"Pisces",dates:"19 फेब्रुवारी – 20 मार्च",planet:"गुरू",dev:"विष्णू",num:"7",color:"समुद्री हिरवा",gem:"पुखराज",day:"गुरुवार",
+   score:"आजचा दिवस: ⭐⭐⭐⭐ (4/5)",
+   desc:"आज आध्यात्मिक उन्नती होईल. सेवाभावाने काम करा. कला व संगीतात रुची वाढेल. स्वप्ने साकार होण्याची संधी येईल.",
+   good:["आध्यात्मिक शांती","कलेत यश","सेवाकार्यात आनंद","स्वप्नपूर्ती"],
+   bad:["भ्रमात राहू नका","व्यसनांपासून दूर राहा","अवास्तव विचार टाळा"],
+   upay:"विष्णूसहस्त्रनाम पठण करा. पिवळे वस्त्र घाला. गुरुवारी उपवास करा."}
+];
+
+const MANTRAS=[
+  {icon:"🕉️",name:"ॐ (AUM)",cat:"mul",text:"ॐ\nॐ\nॐ",
+   meaning:"ॐ हा विश्वाचा आदिम ध्वनी आहे. A-U-M हे तीन अक्षरे ब्रह्मा, विष्णू आणि महेश यांचे प्रतीक आहेत. हा मंत्र जप करताना सर्व नकारात्मक ऊर्जा नाहीशी होते.",
+   count:108},
+  {icon:"🔱",name:"ॐ नमः शिवाय",cat:"shiva",text:"ॐ नमः शिवाय\nॐ नमः शिवाय\nॐ नमः शिवाय",
+   meaning:"'मी शिवाला नमन करतो' – हा पंचाक्षरी मंत्र नकारात्मक ऊर्जा नाहीशी करतो. ना-म-शि-वा-य हे पाच अक्षरे पृथ्वी, जल, अग्नी, वायू आणि आकाश या पाच तत्त्वांचे प्रतीक आहेत.",count:108},
+  {icon:"🙏",name:"ॐ मणि पद्मे हुम",cat:"mul",text:"ॐ मणि पद्मे हुम\nॐ मणि पद्मे हुम\nॐ मणि पद्मे हुम",
+   meaning:"'कमळातील रत्नाला नमन' – हा मंत्र करुणा जागवतो. बौद्ध आणि हिंदू दोन्ही परंपरांत महत्त्वाचा मंत्र आहे.",count:108},
+  {icon:"💨",name:"सो हम",cat:"mul",text:"सो हम\nसो हम\nसो हम",
+   meaning:"'मी तेच आहे' – श्वासाशी जोडलेला मंत्र. श्वास घेताना 'सो' आणि सोडताना 'हम' म्हणा. आत्म्याशी संपर्क साधण्यास मदत करतो.",count:21},
+  {icon:"🌸",name:"सत् नाम",cat:"mul",text:"सत् नाम\nसत् नाम\nसत् नाम",
+   meaning:"'सत्य माझी ओळख आहे' – कुंडलिनी योगात वापरला जाणारा मंत्र. आत्मशुद्धीसाठी उपयुक्त.",count:108},
+  {icon:"☮️",name:"ॐ शांती शांती शांती",cat:"mul",text:"ॐ शांती शांती शांती\nॐ शांती शांती शांती",
+   meaning:"'शांती, शांती, शांती' – हे तीनदा म्हणणे शारीरिक, मानसिक आणि आध्यात्मिक शांती आणते. आधि, व्याधी आणि उपाधी या तीन प्रकारच्या दुःखांपासून मुक्ती.",count:3},
+  {icon:"🌍",name:"लोकाः समस्ताः सुखिनो भवन्तु",cat:"mul",text:"लोकाः समस्ताः सुखिनो भवन्तु\nलोकाः समस्ताः सुखिनो भवन्तु\nलोकाः समस्ताः सुखिनो भवन्तु",
+   meaning:"'सर्व प्राणिमात्र सुखी आणि मुक्त असोत' – हा विश्वकल्याणाचा मंत्र आहे. सर्वांसाठी प्रेम आणि करुणा जागवतो.",count:108},
+  {icon:"🎵",name:"हरे कृष्ण महामंत्र",cat:"krishna",text:"हरे कृष्ण हरे कृष्ण\nकृष्ण कृष्ण हरे हरे\nहरे राम हरे राम\nराम राम हरे हरे",
+   meaning:"महामंत्र – आनंद आणि भक्ती वाढवतो. हा मंत्र कलियुगातील सर्वात शक्तिशाली मंत्र मानला जातो. नामजप केल्याने मनःशांती मिळते.",count:108},
+  {icon:"🧘",name:"ॐ नमो गुरुदेव नमो",cat:"guru",text:"ॐ नमो गुरुदेव नमो\nॐ नमो गुरुदेव नमो\nॐ नमो गुरुदेव नमो",
+   meaning:"'आंतरिक गुरूला नमन करतो' – ज्ञानाचे द्वार उघडण्यासाठी हा मंत्र जपला जातो. गुरुतत्त्वाला आवाहन करतो.",count:108},
+  {icon:"⭐",name:"हरी ॐ तत् सत्",cat:"mul",text:"हरी ॐ तत् सत्\nहरी ॐ तत् सत्\nहरी ॐ तत् सत्",
+   meaning:"'तेच शाश्वत सत्य आहे' – विश्वाच्या परम सत्याशी जोडण्यासाठी हा मंत्र जपतात. ईश्वराच्या अस्तित्वाची पुष्टी करतो.",count:108},
+  {icon:"🐘",name:"गणपती अथर्वशीर्ष",cat:"ganesh",text:`ॐ नमस्ते गणपतये ।
+त्वमेव प्रत्यक्षं तत्त्वमसि ।
+त्वमेव केवलं कर्तासि ।
+त्वमेव केवलं धर्तासि ।
+त्वमेव केवलं हर्तासि ।
+त्वमेव सर्वं खल्विदं ब्रह्मासि ।
+त्वं साक्षादात्मासि नित्यम् ।।
+
+ऋतं वच्मि । सत्यं वच्मि ।।
+
+अव त्वं माम् ।
+अव वक्तारम् ।
+अव श्रोतारम् ।
+अव दातारम् ।
+अव धातारम् ।`,
+   meaning:"गणेश अथर्वशीर्ष हे गणपतीचे स्तोत्र आहे. हे नित्य वाचल्याने बुद्धी, धन आणि यश मिळते. विघ्ने दूर होतात.",count:1},
+  {icon:"🌬️",name:"गायत्री मंत्र",cat:"surya",text:`ॐ भूर्भुवः स्वः
+तत् सवितुर्वरेण्यम्
+भर्गो देवस्य धीमहि
+धियो यो नः प्रचोदयात् ।।`,
+   meaning:"सर्वात श्रेष्ठ वैदिक मंत्र. 'आपण त्या सूर्य देवाच्या परम तेजाचे ध्यान करतो, जो आपल्या बुद्धीला प्रेरणा देवो.' रोज सकाळी 108 वेळा जपावा.",count:108},
+  {icon:"🐒",name:"हनुमान चालीसा",cat:"hanuman",text:`दोहा:
+श्रीगुरु चरण सरोज रज, निज मनु मुकुरु सुधारि।
+बरनऊ रघुबर बिमल जसु, जो दायकु फल चारि।।
+
+चौपाई:
+जय हनुमान ज्ञान गुण सागर।
+जय कपीस तिहुं लोक उजागर।।
+
+राम दूत अतुलित बल धामा।
+अंजनिपुत्र पवनसुत नामा।।
+
+महाबीर बिक्रम बजरंगी।
+कुमति निवार सुमति के संगी।।
+
+कंचन बरन बिराज सुबेसा।
+कानन कुंडल कुंचित केसा।।
+
+हाथ बज्र औ ध्वजा बिराजे।
+कांधे मूंज जनेऊ साजे।।
+
+शंकर सुवन केसरीनंदन।
+तेज प्रताप महा जग बंदन।।
+
+विद्यावान गुणी अति चातुर।
+राम काज करिबे को आतुर।।
+
+प्रभु चरित्र सुनिबे को रसिया।
+राम लखन सीता मन बसिया।।
+
+सूक्ष्म रूप धरि सियहिं दिखावा।
+बिकट रूप धरि लंक जरावा।।
+
+भीम रूप धरि असुर संहारे।
+रामचंद्र के काज संवारे।।
+
+लाय सजीवन लखन जियाए।
+श्रीरघुबीर हरषि उर लाए।।
+
+रघुपति कीन्ही बहुत बड़ाई।
+तुम मम प्रिय भरतहिं सम भाई।।
+
+सहस बदन तुम्हरो जस गावैं।
+अस कहि श्रीपति कण्ठ लगावैं।।
+
+दोहा:
+पवन तनय संकट हरन, मंगल मूरति रूप।
+राम लखन सीता सहित, हृदय बसहु सुर भूप।।`,
+   meaning:"हनुमान चालीसा – तुलसीदासजींनी रचलेले ४० दोहे. मंगळवार व शनिवारी पठण करणे अत्यंत शुभ. संकट नाशक, शक्तिदायक.",count:1},
+];
+
+const AARTIS=[
+  {icon:"🐘",name:"गणपती आरती",cat:"ganesh",text:`सुखकर्ता दुखहर्ता वार्ता विघ्नाची।
+नुरवी पुरवी प्रेम कृपा जयाची।
+सर्वांगी सुंदर उटी शेंदुराची।
+कंठी झळके माळ मुक्ताफळांची।।
+
+जय देव जय देव जय मंगलमूर्ती।
+दर्शनमात्रे मन:कामना पुरती।। धृ।।
+
+रत्नखचित फरा तुज गौरीकुमरा।
+चंदनाची उटी कुमकुम केशरा।
+हीरखचित मुकुट शोभतो बरा।
+रुणझुणती नूपुरे चरणी घागरिया।। जय देव।।`,
+   meaning:"गणेशाची आरती – विघ्न नाहीसे होतात. प्रत्येक शुभ कार्याच्या आधी म्हटली जाते."},
+  {icon:"🔱",name:"शिव आरती",cat:"shiva",text:`लवथवती विक्राळा ब्रह्मांडी माळा।
+विषे कंठ काळा त्रिनेत्री ज्वाळा।
+लावण्यसुंदर मस्तकी बाळा।
+तेथुनिया जळ निर्मळ वाहे झुळझुळा।।
+
+जय देव जय देव जय श्री शंकरा।
+आरती ओवाळू तुज कर्पूरगौरा।।
+
+कर्पूरगौरा भोळा नयनी विशाळा।
+अर्धांगी पार्वती सुमनांच्या माळा।
+विभूतीने मंडित असे त्रिपुंड्राला।
+भक्ती प्रेमे पूजतो शिव महाकाळा।। जय देव।।`,
+   meaning:"भगवान शंकराची आरती – सोमवारी म्हटल्याने विशेष फळ. मनःशांती मिळते."},
+  {icon:"🌺",name:"दुर्गा आरती",cat:"devi",text:`जयंती मंगला काली भद्रकाली कपालिनी।
+दुर्गा क्षमा शिवा धात्री स्वाहा स्वधा नमोऽस्तुते।।
+
+या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता।
+नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः।।
+
+जय अंबे गौरी मैया जय श्यामा गौरी।
+तुमको निशदिन ध्यावत हरि ब्रह्मा शिवरी।।
+
+माँग सिंदूर विराजत टीको मृगमद को।
+उज्जवल से दोउ नैना चंद्रबदन नीको।।
+
+जय देव जय देव जय जगदंबे माता।
+तेरे दर्शन से सब संकट कट जाता।।`,
+   meaning:"दुर्गामाता आरती – नवरात्रीत विशेष महत्त्व. सर्व दुःखे नाहीशी होतात. शक्ती मिळते."},
+  {icon:"🦚",name:"श्रीकृष्ण आरती",cat:"krishna",text:`आरती कुंजबिहारी की।
+श्री गिरिधर कृष्णमुरारी की।।
+
+गले में बैजंती माला, बजावत मुरली मधुर बाला।
+श्रवण में कुण्डल झलकाला, नंद के आनंद नंदलाला।
+গগনम सम अंग कान्ती की।।
+
+आरती कुंजबिहारी की।।
+
+ललित त्रिभंग ठाढे, करत मुरली मधुर बाजे।
+उर पर कौस्तुभ माला, अर्पण करूं सब माला।
+कर धूप दीप सज्जनी की।।`,
+   meaning:"श्रीकृष्णाची आरती – आनंद आणि भक्ती वाढवते. जन्माष्टमीस विशेष महत्त्व."},
+  {icon:"☀️",name:"सूर्य आरती",cat:"surya",text:`आरती सूर्यनारायणाची।
+जय जय आदित्य भास्कराची।।
+
+सहस्रांशु कोटी तेजस्वी।
+भुवनत्रय व्यापक विश्वाची।।
+
+जय देव जय देव जय भास्करा।
+तव किरणे जगाचे जीवन चाला।।
+
+सप्ताश्वरथी तू रवि शंकरा।
+दर्शनमात्रे पाप जाता।। जय देव।।`,
+   meaning:"सूर्यदेवाची आरती – रोज सकाळी म्हटल्याने आरोग्य आणि तेज वाढते."},
+  {icon:"🌙",name:"चंद्र आरती",cat:"moon",text:`जय जय चंद्रमा सोमेश्वरा।
+त्रिभुवनपालक शीतल सुंदरा।।
+
+नक्षत्रगण नित सेवा करिती।
+औषधीपती पीयूषधारिती।।
+
+जय देव जय देव जय चंद्रदेवा।
+नित्य तुझी पूजिती देवगणसेवा।। जय देव।।`,
+   meaning:"चंद्रदेवाची आरती – सोमवारी म्हटल्याने मन शांत होते. मानसिक स्वास्थ्य मिळते."},
+  {icon:"🐒",name:"हनुमान आरती",cat:"hanuman",text:`आरती कीजे हनुमान लला की।
+दुष्ट दलन रघुनाथ कला की।।
+
+जाके बल से गिरिवर कांपे।
+रोग-दोष जाके निकट न झांके।।
+
+अंजनिपुत्र महा बलदाई।
+संतन के प्रभु सदा सहाई।।
+
+जय जय जय हनुमान गोसाईं।
+कृपा करो गुरुदेव की नाईं।।`,
+   meaning:"हनुमानजींची आरती – मंगळवार व शनिवारी म्हटल्याने भय नाहीसे होते. शक्ती मिळते."},
+  {icon:"🌸",name:"लक्ष्मी आरती",cat:"lakshmi",text:`ॐ जय लक्ष्मी माता, मैया जय लक्ष्मी माता।
+तुमको निशदिन सेवत, हर विष्णु विधाता।।
+
+उमा रमा ब्रह्माणी, तुम ही जग-माता।
+सूर्य-चंद्रमा ध्यावत, नारद ऋषि गाता।।
+
+जय जय जय लक्ष्मी माता।।
+
+दुर्गारूप निरंजनि, सुख संपति दाता।
+जो कोई तुमको ध्यावत, ऋद्धि-सिद्धि धन पाता।।`,
+   meaning:"लक्ष्मीमाता आरती – शुक्रवारी म्हटल्याने घरात धन-समृद्धी येते."},
+  {icon:"🧡",name:"विष्णू आरती",cat:"vishnu",text:`शांताकारम भुजगशयनम पद्मनाभम सुरेशम।
+विश्वाधारम गगनसदृशम मेघवर्णं शुभांगम।।
+
+लक्ष्मीकांतम कमलनयनम योगिभिर्ध्यानगम्यम।
+वन्दे विष्णुं भवभयहरम सर्वलोकैकनाथम।।
+
+जय विष्णु भगवान जय नारायणा।
+जय पद्मनाभ जय लोकपालना।।`,
+   meaning:"भगवान विष्णूची आरती – गुरुवारी म्हटल्याने सर्व मनोकामना पूर्ण होतात."},
+];
+
+const PUJAS=[
+  {icon:"🔱",name:"महारुद्राभिषेक",desc:"शिवाचा विशेष अभिषेक",price:"₹3,100",dur:"3-4 तास",benefit:"दोष निवारण, मनःशांती"},
+  {icon:"🐘",name:"गणेश पूजा",desc:"विघ्नहर्त्याची पूजा",price:"₹1,100",dur:"1-2 तास",benefit:"विघ्न नाहीसे, यश मिळते"},
+  {icon:"🌺",name:"नवचंडी यज्ञ",desc:"नऊ दिवसांचा यज्ञ",price:"₹11,000",dur:"9 दिवस",benefit:"शत्रू नाश, आर्थिक उन्नती"},
+  {icon:"🕯️",name:"सत्यनारायण पूजा",desc:"मंगलमय पूजा",price:"₹2,100",dur:"2-3 तास",benefit:"सर्व मनोकामना पूर्ण"},
+  {icon:"💑",name:"विवाह पूजा",desc:"लग्न विधी",price:"₹5,100",dur:"4-5 तास",benefit:"सुखी वैवाहिक जीवन"},
+  {icon:"🏠",name:"गृहप्रवेश",desc:"नवीन घर प्रवेश पूजा",price:"₹3,100",dur:"2-3 तास",benefit:"घरात सुख-समृद्धी"},
+  {icon:"🌸",name:"कुंडली दोष निवारण",desc:"ग्रह शांती पूजा",price:"₹2,100",dur:"2 तास",benefit:"ग्रह दोष समाप्त"},
+  {icon:"👶",name:"नामकरण संस्कार",desc:"बाळाचे नामकरण",price:"₹1,500",dur:"1-2 तास",benefit:"बाळाचे दीर्घायुष्य"},
+  {icon:"🏛️",name:"वास्तु शांती",desc:"घर-दुकान वास्तु पूजा",price:"₹4,100",dur:"3-4 तास",benefit:"वास्तु दोष नाहीसे"},
+  {icon:"🎵",name:"अखंड रामायण",desc:"24 तास रामायण पठण",price:"₹8,100",dur:"24 तास",benefit:"पापमुक्ती, कुटुंब शांती"},
+];
+
+const PUJA_TYPE_DESC={
+  booking:"📅 <strong>Puja Booking</strong> – भविष्यातील तारखेसाठी पूजेचे वेळापत्रक ठरवा. पुरोहित/पंडितजी घरी येऊन पूजा करतील.",
+  request:"🙏 <strong>Puja Request</strong> – विशिष्ट विधी करण्यासाठी विनंती करा. गुरुजी आपल्या इच्छेप्रमाणे योग्य पूजा विधी निश्चित करतील.",
+  archana:"🌸 <strong>Archana</strong> – पुजाऱ्याला तुमच्यावतीने देवाला फुले अर्पण करून नामजप करण्याची विनंती करा.",
+  seva:"🕉️ <strong>Seva Request</strong> – मंदिरात दान किंवा विशेष समारंभाची सेवा अर्पण करा."
+};
+
+const SERVICES_DATA=[
+  {icon:"📜",name:"जन्म कुंडली",desc:"ग्रह स्थिती विश्लेषण",detail:"जन्माच्या वेळी ग्रहांची स्थिती पाहून जीवनाचे सविस्तर विश्लेषण केले जाते. कुंडली बघून करिअर, विवाह, आरोग्य, संपत्ती याबद्दल मार्गदर्शन मिळते.",price:"₹500 – ₹2,000",time:"1-2 तास"},
+  {icon:"💑",name:"कुंडली जुळणी",desc:"विवाह योग्यता पडताळणी",detail:"वधू-वरांच्या कुंडल्या जुळवण्यात येतात. अष्टकूट पद्धतीने 36 गुण तपासले जातात. मंगळ दोष, नाडी दोष इत्यादी पाहिले जातात.",price:"₹1,000 – ₹3,000",time:"2-3 तास"},
+  {icon:"🏠",name:"वास्तु शास्त्र",desc:"घर व व्यवसाय वास्तु",detail:"घराची दिशा, खोल्यांची स्थिती, मुख्य दरवाजा, स्वयंपाकघर इत्यादी वास्तुशास्त्रानुसार तपासले जाते. दोष असल्यास उपाय सांगितले जातात.",price:"₹2,000 – ₹5,000",time:"2-4 तास"},
+  {icon:"🕯️",name:"धार्मिक विधी",desc:"पूजा, हवन, यज्ञ",detail:"गृहप्रवेश, सत्यनारायण पूजा, रुद्राभिषेक, नवचंडी यज्ञ, कुळाचार इत्यादी सर्व प्रकारचे धार्मिक विधी केले जातात.",price:"₹1,100 – ₹11,000",time:"1-9 तास"},
+  {icon:"💍",name:"लग्न मुहूर्त",desc:"शुभ विवाह तारीख",detail:"ज्योतिषशास्त्रानुसार वधू-वरांच्या कुंडल्या पाहून शुभ लग्न मुहूर्त काढला जातो. चांगले नक्षत्र, तिथी आणि लग्न निश्चित केले जाते.",price:"₹500 – ₹1,500",time:"1-2 तास"},
+  {icon:"🏡",name:"गृहप्रवेश",desc:"नवीन घरात प्रवेश पूजा",detail:"नवीन घरात प्रवेश करण्यासाठी शुभ मुहूर्त काढणे, वास्तुशांती पूजा, गृहप्रवेश विधी सर्व केले जातात.",price:"₹3,000 – ₹7,000",time:"3-5 तास"},
+  {icon:"💎",name:"रत्न सल्ला",desc:"शुभ रत्न निवड",detail:"कुंडलीनुसार कोणते रत्न घालावे हे सांगितले जाते. माणिक, पन्ना, मोती, पुष्कराज, नीलम, हिरा इत्यादी रत्नांचे फायदे व नियम समजावले जातात.",price:"₹300 – ₹1,000",time:"30 मिनिटे – 1 तास"},
+  {icon:"🔮",name:"दोष निवारण",desc:"कालसर्प, मंगळ दोष",detail:"कालसर्प दोष, मंगळ दोष, केमद्रुम दोष, पितृ दोष इत्यादी ग्रह दोष निवारणासाठी विशेष पूजा आणि उपाय केले जातात.",price:"₹2,100 – ₹8,100",time:"2-6 तास"},
+  {icon:"💒",name:"विनामुल्य वधु-वर",desc:"नोंदणी केंद्र",detail:"विनामुल्य वधु-वर नोंदणी करा. ज्योतिषशास्त्रानुसार कुंडली जुळणी करून योग्य जीवनसाथी शोधण्यात मदत केली जाते. गोपनीयता राखली जाते.",price:"विनामुल्य",time:"—"},
+  {icon:"🧿",name:"यंत्र-मंत्र-तंत्र",desc:"विशेष यंत्र पूजा",detail:"श्री यंत्र, कुबेर यंत्र, महामृत्युंजय मंत्र इत्यादी विशेष यंत्रे व मंत्रांची पूजा करून जीवनातील अडचणी दूर केल्या जातात.",price:"₹1,100 – ₹5,100",time:"1-3 तास"},
+];
+
+// ═══════════════════ STATE ═══════════════════
+let lang='mr', calYear, calMonth, selPujaType='booking', selPujaIdx=-1;
+let gjList=JSON.parse(localStorage.getItem('gjList')||'[]');
+let yogaLogs=JSON.parse(localStorage.getItem('yogaLogs')||'[]');
+
+// ═══════════════════ INIT ═══════════════════
+window.onload=()=>{
+  const now=new Date();
+  calYear=now.getFullYear(); calMonth=now.getMonth();
+  startClock(); loadPanchang(); renderCalendar();
+  renderGurujiList(); renderBookings(); renderYogaLogs();
+  initMantraCats(); initAartiCats(); initSvcGrid(); initPujaGrid(); initTempleGods();
+  setPujaTypeDesc('booking');
+  document.getElementById('rashiDateBar').textContent='📅 '+DAYS_MR[now.getDay()]+', '+now.getDate()+' '+MONTHS_MR[now.getMonth()]+' '+now.getFullYear();
+  document.getElementById('dailyThought').textContent=THOUGHTS[now.getDate()%THOUGHTS.length];
+  document.getElementById('yDate').valueAsDate=now;
+  document.getElementById('bDate').min=now.toISOString().split('T')[0];
+};
+
+// ═══════════════════ CLOCK ═══════════════════
+function startClock(){
+  function tick(){
+    const n=new Date();
+    document.getElementById('clockTime').textContent=n.toLocaleTimeString('mr-IN');
+    document.getElementById('clockDate').textContent=DAYS_MR[n.getDay()]+', '+n.getDate()+' '+MONTHS_MR[n.getMonth()]+' '+n.getFullYear();
+    const ti=TITHIS[(n.getDate()-1)%15];
+    const nk=NAKSHATRAS[(n.getDate()+n.getMonth()*3)%27];
+    document.getElementById('clockTithi').textContent='तिथी: '+ti+' | नक्षत्र: '+nk;
+  }
+  tick(); setInterval(tick,1000);
+}
+
+// ═══════════════════ PANCHANG ═══════════════════
+function loadPanchang(){
+  const n=new Date(); const d=n.getDay(); const dt=n.getDate(); const mo=n.getMonth();
+  document.getElementById('pp1').textContent=TITHIS[(dt-1)%15];
+  document.getElementById('pp2').textContent=NAKSHATRAS[(dt+mo*3)%27];
+  document.getElementById('pp3').textContent=YOGAS[(dt+mo)%27];
+  document.getElementById('pp4').textContent=KARANS[dt%7];
+  document.getElementById('pp5').textContent=SUNRISE[mo];
+  document.getElementById('pp6').textContent=SUNSET[mo];
+  document.getElementById('pp7').textContent='14:'+String(20+(dt%15)).padStart(2,'0');
+  document.getElementById('pp8').textContent=RAHU_MR[d];
+  const muhurts={0:"🌅 अभिजित: 12:05–12:55 | गोधूली: 18:30–19:00 | ब्राह्म: 04:30–05:15",1:"🌅 अभिजित: 11:58–12:48 | व्रज मुहूर्त: 08:00–08:45 | अमृत: 15:00–16:30",2:"🌅 अभिजित: 12:10–13:00 | सर्वोत्तम: 07:15–08:00 | लाभ: 09:00–10:30",3:"🌅 अभिजित: 12:03–12:53 | ब्राह्म: 04:30–05:15 | शुभ: 10:30–12:00",4:"🌅 अभिजित: 12:00–12:50 | अमृत: 10:30–11:15 | लाभ: 15:00–16:30",5:"🌅 अभिजित: 11:55–12:45 | प्रदोष: 18:45–19:30 | शुभ: 07:30–09:00",6:"🌅 अभिजित: 12:08–12:58 | संध्या: 18:00–18:30 | व्रज: 09:00–10:30"};
+  const fests={0:"रविवार – सूर्यदेव पूजा | आदित्य हृदयम पठण | सूर्याला अर्घ्य द्या",1:"सोमवार – शिव पूजा | सोमवारी उपवास | शिव मंत्र जप करा",2:"मंगळवार – हनुमान पूजा | हनुमान चालिसा पठण | लाल फुले अर्पण",3:"बुधवार – गणेश पूजा | गणपती अथर्वशीर्ष | हिरवी वस्त्रे",4:"गुरुवार – गुरुदेव पूजा | विष्णुसहस्त्रनाम | पिवळे वस्त्र",5:"शुक्रवार – देवी पूजा | लक्ष्मी आरती | शुक्रवारचा उपवास",6:"शनिवार – शनिदेव पूजा | शनि स्तोत्र | काळे तीळ दान"};
+  document.getElementById('muhurtCard').innerHTML='<p style="font-size:12px;line-height:2">'+muhurts[d]+'</p>';
+  document.getElementById('festCard').textContent='🔔 '+fests[d];
+}
+
+// ═══════════════════ CALENDAR ═══════════════════
+const CAL_DAYS_HDR=['र','स','म','बु','गु','शु','श'];
+const CAL_DAYS_HDR_EN=['S','M','T','W','T','F','S'];
+const SPECIAL_DATES={
+  '2026-04-14':'डॉ. बाबासाहेब आंबेडकर जयंती',
+  '2026-04-19':'चैत्र शुक्ल एकादशी – कामदा एकादशी',
+  '2026-05-04':'वैशाख पौर्णिमा – बुद्ध पौर्णिमा',
+  '2026-05-19':'वैशाख अमावस्या',
+  '2026-06-01':'ज्येष्ठ शुक्ल एकादशी',
+  '2026-08-09':'रक्षाबंधन',
+  '2026-08-15':'स्वातंत्र्यदिन',
+  '2026-08-18':'जन्माष्टमी',
+  '2026-09-17':'गणेश चतुर्थी',
+  '2026-10-02':'महात्मा गांधी जयंती',
+  '2026-10-20':'दसरा',
+  '2026-11-08':'दिवाळी – लक्ष्मीपूजन',
+};
+
+function renderCalendar(){
+  const title=MONTHS_MR[calMonth]+' '+calYear;
+  document.getElementById('calTitle').textContent=title;
+  const grid=document.getElementById('calGrid');
+  const hdrs=CAL_DAYS_HDR;
+  let html=hdrs.map(d=>`<div class="cal-day-hdr">${d}</div>`).join('');
+  const first=new Date(calYear,calMonth,1).getDay();
+  const days=new Date(calYear,calMonth+1,0).getDate();
+  const today=new Date();
+  for(let i=0;i<first;i++) html+='<div></div>';
+  for(let d=1;d<=days;d++){
+    const dow=(first+d-1)%7;
+    const dateStr=calYear+'-'+String(calMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    const isToday=d===today.getDate()&&calMonth===today.getMonth()&&calYear===today.getFullYear();
+    const hasFest=SPECIAL_DATES[dateStr];
+    const cls=['cal-day'];
+    if(isToday) cls.push('today');
+    if(dow===0) cls.push('sun');
+    if(dow===6) cls.push('sat');
+    html+=`<div class="${cls.join(' ')}" onclick="selDay(${d},'${dateStr}')" title="${hasFest||''}">${d}${hasFest?'<div class="dot"></div>':''}</div>`;
+  }
+  grid.innerHTML=html;
+}
+
+function calNav(dir){calMonth+=dir;if(calMonth>11){calMonth=0;calYear++;}else if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
+
+function selDay(d,dateStr){
+  document.querySelectorAll('.cal-day').forEach(el=>el.classList.remove('sel-day'));
+  event.target.classList.add('sel-day');
+  const card=document.getElementById('selDayCard');
+  const dateObj=new Date(dateStr);
+  const ti=TITHIS[(d-1)%15]; const nk=NAKSHATRAS[(d+dateObj.getMonth()*3)%27];
+  const yo=YOGAS[(d+dateObj.getMonth())%27];
+  const fest=SPECIAL_DATES[dateStr]||'';
+  document.getElementById('selDayTitle').textContent=DAYS_MR[dateObj.getDay()]+', '+d+' '+MONTHS_MR[dateObj.getMonth()]+' '+dateObj.getFullYear();
+  document.getElementById('selDayInfo').innerHTML=`तिथी: <strong>${ti}</strong> | नक्षत्र: <strong>${nk}</strong> | योग: <strong>${yo}</strong><br>राहुकाल: <strong>${RAHU_MR[dateObj.getDay()]}</strong><br>${fest?'🔔 <strong>'+fest+'</strong>':''}`;
+  card.style.display='block';
+}
+
+// ═══════════════════ RASHI ═══════════════════
+function showRashi(i){
+  const r=RASHIS[i];
+  document.getElementById('rSym').textContent=r.sym;
+  document.getElementById('rName').textContent=r.n+' ('+r.eng+')';
+  document.getElementById('rDates').textContent='📅 '+r.dates;
+  document.getElementById('rScore').textContent=r.score;
+  document.getElementById('rDesc').textContent=r.desc;
+  document.getElementById('rNum').textContent=r.num;
+  document.getElementById('rColor').textContent=r.color;
+  document.getElementById('rGem').textContent=r.gem;
+  document.getElementById('rDay').textContent=r.day;
+  document.getElementById('rDev').textContent=r.dev;
+  document.getElementById('rPlanet').textContent=r.planet;
+  document.getElementById('rGood').innerHTML=r.good.map(g=>'<li>'+g+'</li>').join('');
+  document.getElementById('rBad').innerHTML=r.bad.map(b=>'<li>'+b+'</li>').join('');
+  document.getElementById('rUpay').textContent=r.upay;
+  document.getElementById('rashiDetail').classList.add('show');
+  document.querySelectorAll('.rashi-item').forEach((el,j)=>el.classList.toggle('sel',j===i));
+  document.getElementById('rashiDetail').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ═══════════════════ KUNDALI ═══════════════════
+const PLANETS=[
+  {n:"☉ सूर्य",rashi:"सिंह",bhav:"5वा",sthiti:"उच्च","color":"#FF6B00"},
+  {n:"🌙 चंद्र",rashi:"कर्क",bhav:"4था",sthiti:"स्वग्रही","color":"#90CAF9"},
+  {n:"♂ मंगळ",rashi:"मेष",bhav:"1ला",sthiti:"उच्च","color":"#EF5350"},
+  {n:"☿ बुध",rashi:"मिथुन",bhav:"3रा",sthiti:"स्वग्रही","color":"#66BB6A"},
+  {n:"♃ गुरू",rashi:"धनु",bhav:"9वा",sthiti:"उच्च","color":"#FFB300"},
+  {n:"♀ शुक्र",rashi:"वृषभ",bhav:"2रा",sthiti:"स्वग्रही","color":"#F48FB1"},
+  {n:"♄ शनी",rashi:"कुंभ",bhav:"11वा",sthiti:"स्वग्रही","color":"#78909C"},
+  {n:"☊ राहू",rashi:"वृश्चिक",bhav:"8वा",sthiti:"—","color":"#7E57C2"},
+  {n:"☽ केतु",rashi:"वृषभ",bhav:"2रा",sthiti:"—","color":"#7E57C2"},
+];
+
+function genKundali(){
+  const n=document.getElementById('kN').value.trim();
+  const dob=document.getElementById('kD').value;
+  const place=document.getElementById('kP').value.trim();
+  if(!n||!dob){showToast('⚠️ नाव आणि जन्म तारीख आवश्यक आहे');return;}
+  const d=new Date(dob);
+  document.getElementById('kCN').textContent=n;
+  document.getElementById('kCD').textContent=d.getDate()+' '+MONTHS_MR[d.getMonth()]+' '+d.getFullYear();
+  document.getElementById('kCL').textContent='📍 '+(place||'—');
+  document.getElementById('kTitle').textContent='📜 '+n+' यांची कुंडली';
+  const lagIdx=(d.getDate()+d.getMonth()*3)%12;
+  document.getElementById('planetTbody').innerHTML=PLANETS.map(p=>`<tr><td style="color:${p.color};font-weight:700">${p.n}</td><td>${p.rashi}</td><td>${p.bhav}</td><td>${p.sthiti}</td></tr>`).join('');
+  // Dosha
+  const hasMangal=Math.random()>0.5; const hasKalSarp=Math.random()>0.6;
+  document.getElementById('doshaResult').innerHTML=`
+    <p style="font-size:12px;line-height:2">
+      <span class="dosha-badge ${hasMangal?'dosha-yes':'dosha-no'}">${hasMangal?'⚠️ मंगळ दोष – आहे':'✅ मंगळ दोष – नाही'}</span>
+      <span class="dosha-badge ${hasKalSarp?'dosha-yes':'dosha-no'}">${hasKalSarp?'⚠️ कालसर्प दोष – आहे':'✅ कालसर्प दोष – नाही'}</span>
+      <span class="dosha-badge dosha-no">✅ पितृ दोष – नाही</span>
+      <span class="dosha-badge dosha-no">✅ नाडी दोष – नाही</span>
+      <br><br>
+      ${hasMangal?'🔴 <strong>मंगळ दोष उपाय:</strong> मंगळवारी हनुमान चालिसा | लाल मूंगा घाला | मंगलनाथ मंदिरात पूजा करा':''}
+      ${hasKalSarp?'<br>🟣 <strong>कालसर्प दोष उपाय:</strong> त्र्यंबकेश्वरला कालसर्प शांती पूजा करा | नागपंचमीला नाग पूजा':''}
+    </p>`;
+  const lagRashi=RASHIS[lagIdx];
+  document.getElementById('kAnalysis').innerHTML=`<p style="font-size:12px;line-height:2">
+    🔱 <strong>लग्न राशी:</strong> ${lagRashi.n} (${lagRashi.eng})<br>
+    🌙 <strong>चंद्र राशी:</strong> ${RASHIS[(lagIdx+4)%12].n}<br>
+    ☉ <strong>सूर्य राशी:</strong> ${RASHIS[(lagIdx+2)%12].n}<br>
+    ⭐ <strong>जन्म नक्षत्र:</strong> ${NAKSHATRAS[(d.getDate()+d.getMonth()*3)%27]}<br>
+    🎯 <strong>योग्य व्यवसाय:</strong> ${['वैद्यकीय','अध्यापन','व्यापार','तंत्रज्ञान','कला','प्रशासन'][lagIdx%6]}<br>
+    💍 <strong>शुभ विवाह वर्ष:</strong> ${d.getFullYear()+22+lagIdx%5}<br>
+    💎 <strong>शुभ रत्न:</strong> ${lagRashi.gem}<br>
+    🎨 <strong>शुभ रंग:</strong> ${lagRashi.color}<br>
+    📅 <strong>शुभ दिवस:</strong> ${lagRashi.day}<br><br>
+    ⚠️ <em>ही एक संगणक-निर्मित सांकेतिक कुंडली आहे. अचूक विश्लेषणासाठी गुरुजींशी संपर्क करा.</em>
+  </p>`;
+  document.getElementById('kResult').classList.add('show');
+  document.getElementById('kResult').scrollIntoView({behavior:'smooth'});
+  showToast('✅ कुंडली तयार झाली!');
+}
+
+// ═══════════════════ PUJA ═══════════════════
+function initPujaGrid(){
+  document.getElementById('pujaGrid').innerHTML=PUJAS.map((p,i)=>`
+    <div class="puja-card" onclick="selPuja(${i})" id="pujaC${i}">
+      <div class="puja-icon">${p.icon}</div>
+      <div class="puja-name">${p.name}</div>
+      <div class="puja-price">${p.price}</div>
+      <div class="puja-dur">⏱ ${p.dur}</div>
+    </div>`).join('');
+}
+
+function selPuja(i){
+  selPujaIdx=i;
+  document.querySelectorAll('.puja-card').forEach((c,j)=>c.classList.toggle('sel-puja',j===i));
+  document.getElementById('bPuja').value=PUJAS[i].name+' ('+PUJAS[i].price+')';
+  document.getElementById('bookingForm').classList.add('show');
+  document.getElementById('bookingForm').scrollIntoView({behavior:'smooth'});
+}
+
+function setPujaType(el,type){
+  selPujaType=type;
+  document.querySelectorAll('.type-tab').forEach(t=>t.classList.remove('active-tab'));
+  el.classList.add('active-tab');
+  setPujaTypeDesc(type);
+}
+function setPujaTypeDesc(type){document.getElementById('pujaTypeDesc').innerHTML=PUJA_TYPE_DESC[type];}
+
+// ═══════════════════ PUJA BACKEND ═══════════════════
+
+// Storage helpers
+function loadPujaReqs(){try{return JSON.parse(localStorage.getItem('pujaRequests')||'[]');}catch{return[];}}
+function savePujaReqs(){localStorage.setItem('pujaRequests',JSON.stringify(pujaRequests));}
+function genReqId(){return Date.now().toString(36)+Math.random().toString(36).slice(2,5);}
+
+let pujaRequests = loadPujaReqs();
+let gjCurrentFilter = 'pending';
+let gjLoggedIn = false;
+let gjUser = null;
+
+// ── Tab switcher ──
+function switchPujaTab(tab){
+  document.getElementById('pujaTabUser').classList.toggle('active', tab==='user');
+  document.getElementById('pujaTabGj').classList.toggle('active', tab==='guruji');
+  document.getElementById('pujaUserPanel').style.display = tab==='user' ? 'block' : 'none';
+  document.getElementById('pujaGjPanel').style.display  = tab==='guruji' ? 'block' : 'none';
+  if(tab==='guruji' && gjLoggedIn) renderGjDashboard();
+}
+
+// ── SMS simulation ──
+function showSmsToast(to, phone, text){
+  const wrap = document.getElementById('smsToastWrap');
+  const div = document.createElement('div');
+  div.className = 'sms-toast ' + (to==='guruji'?'sms-guruji':'sms-user');
+  div.innerHTML = `<div class="sms-label">📱 SMS → ${to==='guruji'?'गुरुजी':'User ('+phone+')'}</div><div>${text}</div>`;
+  wrap.appendChild(div);
+  setTimeout(()=>div.remove(), 4500);
+}
+
+// ── Submit puja request ──
+function bookPuja(){
+  const nm=document.getElementById('bName').value.trim();
+  const ph=document.getElementById('bPhone').value.trim();
+  const dt=document.getElementById('bDate').value;
+  if(!nm||!ph||!dt){showToast('⚠️ नाव, मोबाईल आणि तारीख आवश्यक आहे');return;}
+  if(!/^\d{10}$/.test(ph)){showToast('⚠️ 10 अंकी मोबाईल नंबर द्या');return;}
+
+  const req={
+    id: genReqId(),
+    name: nm, phone: ph, date: dt,
+    time: document.getElementById('bTime').value,
+    location: document.getElementById('bLoc').value,
+    note: document.getElementById('bNote').value,
+    puja: document.getElementById('bPuja').value||'—',
+    pujaIcon: selPujaIdx>=0 ? PUJAS[selPujaIdx].icon : '🔱',
+    type: selPujaType,
+    status: 'pending',
+    gurujiNote: '',
+    createdAt: Date.now()
+  };
+
+  pujaRequests.unshift(req);
+  savePujaReqs();
+  renderBookings();
+
+  // Clear form
+  ['bName','bPhone','bDate','bTime','bLoc','bNote'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('bPuja').value='';
+  selPujaIdx=-1;
+  document.querySelectorAll('.puja-card').forEach(c=>c.classList.remove('sel-puja'));
+
+  // In-app SMS toast to Guruji
+  setTimeout(()=>{
+    showSmsToast('guruji','','📿 नवीन पूजा Request!\n'+req.pujaIcon+' '+req.puja+'\nनाव: '+req.name+'\nफोन: '+req.phone+'\nतारीख: '+req.date);
+  }, 400);
+
+  // SMS confirmation to the BOOKING PERSON
+  const userConfirmSms = `Namaste ${req.name}! Aapli "${req.puja}" booking request milali ahe! 🙏\nTarikh: ${req.date}${req.time?' | Vel: '+req.time:''}\nAamhi lavkarach confirm karoo. Sampark: 9969483437\n-ShivShakti Jyotish Kendra`;
+
+  // Show in-app SMS preview for booking person
+  setTimeout(()=>{
+    showSmsToast('user', req.phone, userConfirmSms);
+  }, 700);
+
+  // Actually send SMS to booking person's phone if API key available
+  const apiKey = getSmsApiKey();
+  if(apiKey){
+    sendFast2SMS(req.phone, userConfirmSms).then(result=>{
+      if(result.ok){
+        showToast('📱 Confirmation SMS पाठवला → +91 '+req.phone);
+      } else {
+        showToast('✅ Request पाठवली! (SMS failed: '+result.error+')');
+      }
+    });
+  } else {
+    showToast('✅ Request पाठवली! गुरुजींकडून SMS येईल.');
+  }
+}
+
+// ── Render user's own bookings ──
+function renderBookings(){
+  const el=document.getElementById('bookingsList');
+  if(!pujaRequests.length){
+    el.innerHTML='<p style="font-size:12px;color:var(--mid);text-align:center;padding:10px">अद्याप कोणतीही Request नाही</p>';
+    return;
+  }
+  el.innerHTML=pujaRequests.map(r=>`
+    <div class="req-card req-card-${r.status}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+        <div>
+          <div style="font-weight:800;font-size:14px">${r.pujaIcon||'🔱'} ${r.puja}</div>
+          <div style="font-size:11px;color:var(--mid);margin-top:2px">📅 ${r.date}${r.time?' • '+r.time:''}</div>
+          ${r.location?`<div style="font-size:11px;color:var(--mid)">📍 ${r.location}</div>`:''}
+        </div>
+        <span class="status-badge status-${r.status}">${r.status==='pending'?'⏳ Pending':r.status==='accepted'?'✅ Accepted':'❌ Rejected'}</span>
+      </div>
+      ${r.gurujiNote?`<div style="font-size:11px;padding:6px 10px;border-radius:8px;margin-top:6px;background:${r.status==='accepted'?'#E8F5E9':'#FFEBEE'};color:${r.status==='accepted'?'#1B5E20':'#B71C1C'}">💬 गुरुजी: ${r.gurujiNote}</div>`:''}
+      <button onclick="delBooking('${r.id}')" style="position:absolute;top:10px;right:10px;background:#FFEBEE;border:1px solid #EF9A9A;border-radius:7px;padding:3px 8px;font-size:10px;color:#B71C1C;cursor:pointer">🗑</button>
+    </div>`).join('');
+}
+
+function delBooking(id){
+  pujaRequests=pujaRequests.filter(r=>r.id!==id);
+  savePujaReqs();
+  renderBookings();
+  showToast('🗑 Request हटवली');
+}
+
+// ══════════════════════════════════════════════════════
+// GURUJI PHONE-ONLY OTP LOGIN — any 10-digit number
+// ══════════════════════════════════════════════════════
+let gjOtpCode    = '';
+let gjOtpPhone   = '';
+let gjOtpName    = '';
+let gjOtpTimerId = null;
+let gjOtpSecs    = 0;
+let gjLoginPhotoData = '';
+
+function gjPhoneChanged(el){
+  const hint = document.getElementById('gjPhoneHint');
+  if(el.value.length===10){
+    hint.innerHTML='<span style="color:#1B5E20;font-weight:700">✅ नंबर valid आहे — OTP पाठवा</span>';
+    // Pre-fill name from stored profile if exists
+    const stored=getGurujiProfile(el.value);
+    if(stored){
+      const nameEl=document.getElementById('gjNameInput');
+      if(nameEl && !nameEl.value) nameEl.value=stored.name||'';
+      // Pre-load photo preview in login circle
+      if(stored.photo) gjSetLoginPhoto(stored.photo);
+    }
+  }
+  else if(el.value.length>0) hint.innerHTML='<span style="color:#E65100">'+el.value.length+'/10 अंक</span>';
+  else hint.textContent='';
+}
+
+function gjNameChanged(el){
+  el.style.borderColor = el.value.trim() ? '#FF6B00' : '#FFB300';
+}
+
+// Handle photo upload on login screen
+function gjHandlePhotoUpload(input){
+  if(!input.files||!input.files[0]) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const data=e.target.result;
+    gjLoginPhotoData=data;
+    gjSetLoginPhoto(data);
+    showToast('📷 फोटो upload झाला!');
+    // If phone already entered, persist immediately
+    const ph=(document.getElementById('gjPhoneInput').value||'').trim();
+    const nm=(document.getElementById('gjNameInput').value||'').trim();
+    if(ph.length===10) saveGurujiProfile(ph, nm||undefined, data);
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+// Show photo in login DP circle
+function gjSetLoginPhoto(src){
+  const emoji=document.getElementById('gjLoginPhotoEmoji');
+  const img=document.getElementById('gjLoginPhotoImg');
+  if(!emoji||!img) return;
+  if(src){
+    emoji.style.display='none';
+    img.src=src; img.style.display='block';
+  } else {
+    emoji.style.display=''; img.style.display='none'; img.src='';
+  }
+}
+
+// Handle photo upload from dashboard
+function gjHandleDashPhoto(input){
+  if(!input.files||!input.files[0]) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const data=e.target.result;
+    gjSetDashPhoto(data);
+    if(gjUser) saveGurujiProfile(gjUser.phone, gjUser.name, data);
+    showToast('📷 Profile फोटो update झाला!');
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+// Show photo in dashboard DP circle
+function gjSetDashPhoto(src){
+  const emoji=document.getElementById('gjDashAvatarEmoji');
+  const img=document.getElementById('gjDashAvatarImg');
+  if(!emoji||!img) return;
+  if(src){
+    emoji.style.display='none';
+    img.src=src; img.style.display='block';
+  } else {
+    emoji.style.display=''; img.style.display='none'; img.src='';
+  }
+}
+
+function gjSendOtp(){
+  const ph = (document.getElementById('gjPhoneInput').value||'').trim();
+  const nm = (document.getElementById('gjNameInput').value||'').trim();
+  const errEl = document.getElementById('gjPhoneHint');
+  if(!nm){
+    document.getElementById('gjNameInput').style.borderColor='#EF9A9A';
+    document.getElementById('gjNameInput').focus();
+    setTimeout(()=>document.getElementById('gjNameInput').style.borderColor='#FFB300',2500);
+    showToast('⚠️ कृपया आपले नाव टाका');
+    return;
+  }
+  if(!/^\d{10}$/.test(ph)){
+    errEl.innerHTML='<span style="color:#B71C1C;font-weight:700">⚠️ कृपया 10 अंकी मोबाईल नंबर टाका</span>';
+    document.getElementById('gjPhoneInput').style.borderColor='#EF9A9A';
+    setTimeout(()=>document.getElementById('gjPhoneInput').style.borderColor='#FFB300',2500);
+    return;
+  }
+  // Generate 4-digit OTP
+  gjOtpCode  = String(1000 + Math.floor(Math.random()*9000));
+  gjOtpPhone = ph;
+  gjOtpName  = nm;
+
+  const smsBody = `ShivShakti Jyotish Kendra\nNamaste! Aapla Login OTP: ${gjOtpCode}\n5 minutes valid. Kunaashi deu naka.\n-ShivShakti`;
+
+  // Switch to OTP step
+  document.getElementById('gjStepPhone').style.display='none';
+  document.getElementById('gjStepOtp').style.display='block';
+  document.getElementById('gjOtpSentTo').textContent='📱 +91 '+ph+' वर OTP पाठवला';
+  // Show simulated SMS bubble
+  document.getElementById('gjSmsBubbleText').textContent=smsBody;
+  document.getElementById('gjSmsBubble').style.display='block';
+  // Clear boxes
+  [0,1,2,3].forEach(i=>{const b=document.getElementById('gjob'+i);b.value='';b.style.borderColor='#FFB300';b.style.background='#FFFDE7';});
+  document.getElementById('gjob0').focus();
+  document.getElementById('gjOtpErr').textContent='';
+
+  // Real SMS if API key set
+  const apiKey=getSmsApiKey();
+  if(apiKey){
+    sendFast2SMS(ph,smsBody);
+    showToast('📱 OTP SMS पाठवत आहे → +91 '+ph);
+  } else {
+    showToast('🔑 Demo OTP (no SMS API): '+gjOtpCode);
+  }
+  gjStartTimer(300);
+}
+
+function gjStartTimer(s){
+  clearInterval(gjOtpTimerId);
+  gjOtpSecs=s;
+  document.getElementById('gjResendBtn').style.display='none';
+  function tick(){
+    const m=Math.floor(gjOtpSecs/60),sec=gjOtpSecs%60;
+    const el=document.getElementById('gjTimerTxt');
+    if(el) el.textContent='⏳ '+m+':'+(sec<10?'0':'')+sec+' बाकी';
+    if(gjOtpSecs<=0){
+      clearInterval(gjOtpTimerId); gjOtpCode='';
+      if(el) el.textContent='⚠️ OTP Expired';
+      const rb=document.getElementById('gjResendBtn'); if(rb) rb.style.display='inline';
+    }
+    gjOtpSecs--;
+  }
+  tick(); gjOtpTimerId=setInterval(tick,1000);
+}
+
+function gjOtpIn(i){
+  const el=document.getElementById('gjob'+i);
+  el.value=el.value.replace(/\D/g,'').slice(-1);
+  if(el.value){el.style.borderColor='#FF6B00';el.style.background='#FFF3E0';if(i<3)document.getElementById('gjob'+(i+1)).focus();}
+  else{el.style.borderColor='#FFB300';el.style.background='#FFFDE7';}
+  const full=[0,1,2,3].map(j=>document.getElementById('gjob'+j).value).join('');
+  if(full.length===4) setTimeout(gjVerifyOtp,300);
+}
+function gjOtpKey(e,i){
+  if(e.key==='Backspace'&&!document.getElementById('gjob'+i).value&&i>0) document.getElementById('gjob'+(i-1)).focus();
+  if(e.key==='Enter') gjVerifyOtp();
+}
+
+function gjVerifyOtp(){
+  const entered=[0,1,2,3].map(i=>document.getElementById('gjob'+i).value).join('');
+  const errEl=document.getElementById('gjOtpErr');
+  if(entered.length<4){errEl.textContent='⚠️ 4 अंकी OTP पूर्ण टाका';return;}
+  if(!gjOtpCode){errEl.textContent='⚠️ OTP Expired — पुन्हा पाठवा';return;}
+  if(entered===gjOtpCode){
+    clearInterval(gjOtpTimerId); gjOtpCode='';
+    gjLoggedIn=true;
+    gjUser={phone:gjOtpPhone, name:gjOtpName};
+    // Save profile for future logins (photo already saved during upload)
+    const existing=getGurujiProfile(gjOtpPhone);
+    const photo = existing ? existing.photo : '';
+    saveGurujiProfile(gjOtpPhone, gjOtpName, photo);
+    // Switch to dashboard
+    document.getElementById('gjLoginScreen').style.display='none';
+    document.getElementById('gjDashboard').style.display='block';
+    document.getElementById('gjDashName').textContent=gjOtpName;
+    document.getElementById('gjDashPhone').textContent='📞 +91 '+gjOtpPhone;
+    // Load photo into dashboard DP
+    gjSetDashPhoto(photo);
+    renderGjDashboard();
+    updateSmsStatusLabel();
+    showToast('✅ Login यशस्वी! जय श्री राम 🙏');
+  } else {
+    errEl.textContent='❌ चुकीचा OTP — पुन्हा प्रयत्न करा';
+    [0,1,2,3].forEach(i=>{const b=document.getElementById('gjob'+i);b.value='';b.style.borderColor='#EF9A9A';b.style.background='#FFEBEE';});
+    document.getElementById('gjob0').focus();
+    setTimeout(()=>{errEl.textContent='';[0,1,2,3].forEach(i=>{document.getElementById('gjob'+i).style.borderColor='#FFB300';document.getElementById('gjob'+i).style.background='#FFFDE7';});},2500);
+  }
+}
+
+function gjResendOtp(){
+  document.getElementById('gjStepOtp').style.display='none';
+  document.getElementById('gjStepPhone').style.display='block';
+  document.getElementById('gjPhoneInput').value=gjOtpPhone;
+  const stored=getGurujiProfile(gjOtpPhone);
+  if(stored) document.getElementById('gjNameInput').value=stored.name||'';
+  gjOtpCode='';
+  gjSendOtp();
+}
+function gjBackToPhone(){
+  clearInterval(gjOtpTimerId); gjOtpCode='';
+  document.getElementById('gjStepOtp').style.display='none';
+  document.getElementById('gjStepPhone').style.display='block';
+}
+function gjLogout(){
+  clearInterval(gjOtpTimerId); gjOtpCode='';
+  gjLoggedIn=false; gjUser=null;
+  document.getElementById('gjLoginScreen').style.display='block';
+  document.getElementById('gjDashboard').style.display='none';
+  document.getElementById('gjStepPhone').style.display='block';
+  document.getElementById('gjStepOtp').style.display='none';
+  const el=document.getElementById('gjPhoneInput'); if(el) el.value='';
+  const nm=document.getElementById('gjNameInput'); if(nm) nm.value='';
+  gjLoginPhotoData='';
+  gjSetLoginPhoto('');
+  gjSetDashPhoto('');
+  showToast('👋 Logout झाले');
+}
+
+// Persist guruji profile per phone — stores {name, photo}
+function saveGurujiProfile(phone, name, photo){
+  try{
+    const p=JSON.parse(localStorage.getItem('gjProfiles')||'{}');
+    const existing = p[phone]||{};
+    p[phone]={name: name||existing.name||'गुरुजी', photo: photo!==undefined ? photo : (existing.photo||'')};
+    localStorage.setItem('gjProfiles',JSON.stringify(p));
+  }catch{}
+}
+function getGurujiProfile(phone){
+  try{
+    const val=JSON.parse(localStorage.getItem('gjProfiles')||'{}')[phone];
+    if(!val) return null;
+    // support old format where value was just a string
+    if(typeof val==='string') return {name:val, photo:''};
+    return val;
+  }catch{return null;}
+}
+
+// ── Guruji filter ──
+function gjFilter(el,f){
+  gjCurrentFilter=f;
+  document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  renderGjRequests();
+}
+
+// ── Render full dashboard ──
+function renderGjDashboard(){
+  pujaRequests=loadPujaReqs(); // refresh
+  const pending=pujaRequests.filter(r=>r.status==='pending').length;
+  const accepted=pujaRequests.filter(r=>r.status==='accepted').length;
+  const rejected=pujaRequests.filter(r=>r.status==='rejected').length;
+  document.getElementById('statPending').textContent=pending;
+  document.getElementById('statAccepted').textContent=accepted;
+  document.getElementById('statRejected').textContent=rejected;
+  renderGjRequests();
+}
+
+function renderGjRequests(){
+  const list = gjCurrentFilter==='all' ? pujaRequests : pujaRequests.filter(r=>r.status===gjCurrentFilter);
+  const el=document.getElementById('gjRequestsList');
+  if(!list.length){
+    el.innerHTML=`<div style="text-align:center;padding:32px 14px;color:var(--mid)">
+      <div style="font-size:40px;margin-bottom:8px">📭</div>
+      <div style="font-size:13px;font-weight:700">कोणतीही Request नाही</div>
+      <div style="font-size:11px;margin-top:4px">${gjCurrentFilter==='pending'?'सर्व requests handled आहेत!':'येथे काहीही नाही'}</div>
+    </div>`;
+    return;
+  }
+  el.innerHTML=list.map(r=>`
+    <div class="req-card req-card-${r.status}" style="position:relative">
+      <!-- Status badge top-right -->
+      <span class="status-badge status-${r.status}" style="position:absolute;top:12px;right:12px">
+        ${r.status==='pending'?'⏳ Pending':r.status==='accepted'?'✅ Accepted':'❌ Rejected'}
+      </span>
+      <!-- Puja + Name -->
+      <div style="margin-bottom:10px;padding-right:80px">
+        <div style="font-weight:800;font-size:16px;color:var(--maroon)">${r.pujaIcon||'🔱'} ${r.puja}</div>
+        <div style="font-size:13px;font-weight:700;color:var(--txt);margin-top:3px">👤 ${r.name}</div>
+      </div>
+      <!-- Contact info box — phone prominent -->
+      <div style="background:${r.status==='pending'?'#FFF8E1':r.status==='accepted'?'#F1F8E9':'#FFF5F5'};border-radius:10px;padding:10px 12px;margin-bottom:10px;border:1px solid ${r.status==='pending'?'#FFE0B2':r.status==='accepted'?'#C8E6C9':'#FFCDD2'}">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;color:var(--mid)">
+          <div style="font-size:13px;font-weight:800;color:#1565C0;grid-column:span 2">📞 <a href="tel:${r.phone}" style="color:#1565C0;text-decoration:none">+91 ${r.phone}</a></div>
+          <div>📅 ${r.date}</div>
+          ${r.time?`<div>🕐 ${r.time}</div>`:'<div></div>'}
+          ${r.location?`<div style="grid-column:span 2">📍 ${r.location}</div>`:''}
+        </div>
+      </div>
+      ${r.note?`<div style="font-size:11px;background:#FFF3E0;border-left:3px solid #FFB300;border-radius:0 8px 8px 0;padding:8px 10px;margin-bottom:10px">📝 ${r.note}</div>`:''}
+      <!-- Accept / Reject (only for pending) -->
+      ${r.status==='pending'?`
+        <textarea class="guruji-note-inp" id="gjnote_${r.id}" placeholder="Optional: ${r.name} ला message लिहा (SMS मध्ये जाईल)..." rows="2"></textarea>
+        <div class="decide-btns" style="margin-top:10px">
+          <button class="accept-btn" onclick="gjDecide('${r.id}','accepted')">✅ Accept करा</button>
+          <button class="reject-btn" onclick="gjDecide('${r.id}','rejected')">❌ Reject करा</button>
+        </div>
+        <div style="font-size:10px;color:#bbb;margin-top:8px;text-align:center">Accept/Reject केल्यावर +91 ${r.phone} वर SMS जाईल</div>`
+      : r.gurujiNote?`<div style="font-size:11px;padding:8px 12px;border-radius:10px;background:${r.status==='accepted'?'#E8F5E9':'#FFEBEE'};color:${r.status==='accepted'?'#1B5E20':'#B71C1C'};border:1px solid ${r.status==='accepted'?'#C8E6C9':'#FFCDD2'}">💬 गुरुजी: ${r.gurujiNote}</div>`:''}
+      <div style="font-size:10px;color:#ccc;margin-top:8px">${new Date(r.createdAt).toLocaleString('mr-IN')} • ID: ${r.id}</div>
+    </div>`).join('');
+}
+
+// ── SMS API helpers ──
+function getSmsApiKey(){ return localStorage.getItem('fast2smsKey')||''; }
+function saveSmsApiKey(){
+  const key=document.getElementById('smsApiKeyInput').value.trim();
+  if(!key){showToast('⚠️ API Key टाका');return;}
+  localStorage.setItem('fast2smsKey',key);
+  updateSmsStatusLabel();
+  document.getElementById('smsApiStatus').innerHTML='<span style="color:#1B5E20">✅ API Key Save झाली!</span>';
+  setTimeout(()=>document.getElementById('smsApiStatus').innerHTML='',2500);
+  showToast('✅ Fast2SMS API Key Save झाली!');
+}
+function toggleSmsSettings(){
+  const p=document.getElementById('smsSettingsPanel');
+  const isShown = p.style.display==='block';
+  p.style.display=isShown?'none':'block';
+  if(!isShown){
+    const saved=getSmsApiKey();
+    if(saved) document.getElementById('smsApiKeyInput').value=saved;
+  }
+}
+function updateSmsStatusLabel(){
+  const lbl=document.getElementById('smsActiveLabel');
+  if(!lbl) return;
+  const key=getSmsApiKey();
+  lbl.textContent=key?'✅ Active (Fast2SMS)':'API Key नाही';
+  lbl.style.color=key?'#1B5E20':'#B71C1C';
+}
+async function testSmsApi(){
+  const key=getSmsApiKey();
+  if(!key){document.getElementById('smsApiStatus').innerHTML='<span style="color:#B71C1C">⚠️ आधी API Key save करा</span>';return;}
+  const statusEl=document.getElementById('smsApiStatus');
+  statusEl.innerHTML='⏳ Test SMS पाठवत आहे...';
+  const testPhone = gjUser ? gjUser.phone : '';
+  if(!testPhone){statusEl.innerHTML='<span style="color:#B71C1C">⚠️ Login required</span>';return;}
+  const result=await sendFast2SMS(testPhone,'🔱 ShivShakti Jyotish Kendra - Test SMS! API working. Jay Shri Ram 🙏');
+  statusEl.innerHTML=result.ok
+    ?'<span style="color:#1B5E20">✅ Test SMS पाठवला! +91 '+testPhone+' वर तपासा.</span>'
+    :'<span style="color:#B71C1C">❌ Error: '+result.error+'</span>';
+}
+
+// ── Real SMS via Fast2SMS ──
+async function sendFast2SMS(phone, message){
+  const apiKey = getSmsApiKey();
+  if(!apiKey) return {ok:false, error:'API Key नाही'};
+  // Clean phone number - remove +91 or 91 prefix
+  const cleanPhone = phone.replace(/^\+?91/,'').replace(/\D/g,'').slice(-10);
+  if(cleanPhone.length!==10) return {ok:false, error:'Invalid phone number'};
+  try{
+    const resp = await fetch('https://www.fast2sms.com/dev/bulkV2?authorization='+encodeURIComponent(apiKey)+'&route=q&message='+encodeURIComponent(message)+'&flash=0&numbers='+cleanPhone, {
+      method:'GET',
+      headers:{'cache-control':'no-cache'}
+    });
+    const data = await resp.json();
+    if(data.return===true) return {ok:true};
+    return {ok:false, error: data.message||'Unknown error'};
+  }catch(e){
+    return {ok:false, error:e.message};
+  }
+}
+
+// ── Accept / Reject with real SMS to requester ──
+let _smsSentModalPhone = '';
+let _smsSentModalText  = '';
+
+function showSmsSentModal(status, phone, smsText, apiHasKey){
+  const modal     = document.getElementById('smsSentModal');
+  const header    = document.getElementById('smsSentModalHeader');
+  const icon      = document.getElementById('smsSentModalIcon');
+  const title     = document.getElementById('smsSentModalTitle');
+  const subtitle  = document.getElementById('smsSentModalSubtitle');
+  const phoneEl   = document.getElementById('smsSentPhone');
+  const textEl    = document.getElementById('smsSentText');
+  const timeEl    = document.getElementById('smsSentTime');
+  const noteEl    = document.getElementById('smsSentApiNote');
+
+  _smsSentModalPhone = phone;
+  _smsSentModalText  = smsText;
+
+  const now = new Date();
+  const hm  = now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+
+  if(status === 'accepted'){
+    header.className = 'sms-modal-header-accept';
+    icon.textContent  = '✅';
+    title.textContent = 'Booking ACCEPT झाली! 🙏';
+    subtitle.textContent = apiHasKey ? '📱 SMS पाठवला जात आहे...' : '📱 WhatsApp ने पाठवा';
+  } else {
+    header.className = 'sms-modal-header-reject';
+    icon.textContent  = '❌';
+    title.textContent = 'Booking Reject झाली';
+    subtitle.textContent = apiHasKey ? '📱 Rejection SMS पाठवत आहे...' : '📱 WhatsApp ने कळवा';
+  }
+
+  phoneEl.textContent = '+91 ' + phone;
+  textEl.textContent  = smsText;
+  timeEl.textContent  = hm;
+  noteEl.textContent  = apiHasKey
+    ? '✅ Fast2SMS API वापरून SMS आपोआप जाईल। WhatsApp हा backup आहे।'
+    : '⚠️ SMS API Key नाही। WhatsApp वापरून manually पाठवा।';
+
+  modal.classList.add('open');
+}
+
+function closeSmsModal(){
+  document.getElementById('smsSentModal').classList.remove('open');
+}
+
+function openSmsWhatsApp(){
+  const ph = _smsSentModalPhone.replace(/\D/g,'').slice(-10);
+  window.open('https://wa.me/91'+ph+'?text='+encodeURIComponent(_smsSentModalText),'_blank');
+}
+
+async function gjDecide(id, status){
+  const noteEl=document.getElementById('gjnote_'+id);
+  const note = noteEl ? noteEl.value.trim() : '';
+  const idx = pujaRequests.findIndex(r=>r.id===id);
+  if(idx<0) return;
+  pujaRequests[idx].status=status;
+  pujaRequests[idx].gurujiNote=note;
+  pujaRequests[idx].decidedAt=Date.now();
+  savePujaReqs();
+  renderGjDashboard();
+  renderBookings();
+
+  const r = pujaRequests[idx];
+  const gjPhone = gjUser ? gjUser.phone : '';
+  const gjName  = gjUser ? gjUser.name  : 'गुरुजी';
+
+  // Build SMS text sent to the person who made the booking
+  const smsText = status==='accepted'
+    ? `Namaste ${r.name}! Aapli "${r.puja}" Booking ACCEPT zali ahe! 🙏\nTarikh: ${r.date}${r.time?' | Vel: '+r.time:''}\n${note?'Guruji: '+note+'\n':''}Sampark kara: ${gjPhone}\n-ShivShakti Jyotish Kendra`
+    : `Namaste ${r.name}! Aapli "${r.puja}" Booking REJECT zali ahe.\n${note?'Karan: '+note+'\n':''}Krupa vegalya tarkhela punha book kara.\nSampark: ${gjPhone}\n-ShivShakti Jyotish Kendra`;
+
+  const apiKey = getSmsApiKey();
+
+  // Show prominent SMS modal immediately
+  setTimeout(()=> showSmsSentModal(status, r.phone, smsText, !!apiKey), 200);
+
+  // Also show small toast
+  showSmsToast('user', r.phone, smsText);
+
+  if(apiKey){
+    showToast(status==='accepted'?'✅ Accept! SMS पाठवत आहे...':'❌ Reject. SMS पाठवत आहे...');
+    const result = await sendFast2SMS(r.phone, smsText);
+    if(result.ok){
+      showToast('📱 SMS पाठवला → +91 '+r.phone);
+      // Update modal subtitle
+      const sub = document.getElementById('smsSentModalSubtitle');
+      if(sub) sub.textContent = '✅ SMS यशस्वीरित्या पाठवला!';
+    } else {
+      showToast('⚠️ SMS failed — WhatsApp वापरा');
+      const sub = document.getElementById('smsSentModalSubtitle');
+      if(sub) sub.textContent = '⚠️ SMS failed — WhatsApp वापरून पाठवा';
+    }
+  } else {
+    showToast(status==='accepted'?'✅ Accept केले!':'❌ Reject केले.');
+  }
+}
+
+// ── AI Analysis ──
+async function gjAiAnalyze(){
+  const btn=document.querySelector('.ai-analyze-btn');
+  const res=document.getElementById('gjAiResult');
+  btn.textContent='⏳ Loading...';
+  btn.disabled=true;
+  res.textContent='AI analyze करत आहे...';
+  try{
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:800,
+        messages:[{role:'user',content:`You are an assistant for a Hindu puja booking system in Maharashtra.
+Analyze these puja requests and respond ONLY in JSON (no markdown):
+${JSON.stringify(pujaRequests.slice(0,20))}
+{
+  "summary": "2-line Marathi summary of all requests",
+  "popular": "most requested puja name",  
+  "tip": "one helpful Marathi tip for guruji",
+  "urgent": "any urgent pending requests (or empty string)"
+}`}]
+      })
+    });
+    const data=await resp.json();
+    const txt=data.content?.find(c=>c.type==='text')?.text||'';
+    const parsed=JSON.parse(txt.replace(/```json|```/g,'').trim());
+    res.innerHTML=`📊 ${parsed.summary}<br>🔱 लोकप्रिय: <strong>${parsed.popular}</strong><br>💡 ${parsed.tip}${parsed.urgent?'<br><span style="color:#E65100">⚠️ '+parsed.urgent+'</span>':''}`;
+  }catch(e){
+    res.textContent='API उपलब्ध नाही. Requests manually तपासा.';}
+  btn.textContent='✨ Analyze';
+  btn.disabled=false;
+}
+
+// ═══════════════════ MANTRAS ═══════════════════
+function initMantraCats(){
+  const cats=[
+    {k:'mul',icon:'🕉️',name:'मूळ मंत्र'},
+    {k:'hanuman',icon:'🐒',name:'हनुमान'},
+    {k:'ganesh',icon:'🐘',name:'गणेश'},
+    {k:'shiva',icon:'🔱',name:'शिव मंत्र'},
+    {k:'krishna',icon:'🎵',name:'कृष्ण मंत्र'},
+    {k:'surya',icon:'☀️',name:'गायत्री'},
+    {k:'guru',icon:'🧘',name:'गुरू मंत्र'},
+    {k:'all',icon:'📖',name:'सर्व मंत्र'},
+  ];
+  document.getElementById('mantraCatGrid').innerHTML=cats.map(c=>`
+    <div class="mcat" onclick="showMantraCat('${c.k}')">
+      <div class="mcat-icon">${c.icon}</div>
+      <div class="mcat-name">${c.name}</div>
+    </div>`).join('');
+}
+
+function showMantraCat(cat){
+  const list=cat==='all'?MANTRAS:MANTRAS.filter(m=>m.cat===cat);
+  const dv=document.getElementById('mantraDetailView');
+  dv.innerHTML=`<button class="back-btn" onclick="backMantra()">← परत जा</button>
+    <div id="mantraContent">${list.map((m,i)=>`
+      <div class="card" style="margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-size:30px">${m.icon}</span>
+          <h3 style="font-size:14px;font-weight:700;color:var(--maroon)">${m.name}</h3>
+        </div>
+        <div class="mantra-text">${m.text}</div>
+        <div class="mantra-meaning">🌸 <strong>अर्थ:</strong> ${m.meaning}</div>
+        <div class="chant-controls">
+          <span style="font-size:12px;font-weight:600;color:var(--mid)">जप संख्या:</span>
+          <button class="count-btn" onclick="chant('cnt_${i}',-1)">−</button>
+          <div class="chant-count" id="cnt_${i}">0</div>
+          <button class="count-btn" onclick="chant('cnt_${i}',1)">+</button>
+          <span style="font-size:11px;color:var(--saf);font-weight:600">/ ${m.count}</span>
+        </div>
+      </div>`).join('')}</div>`;
+  document.getElementById('mantraCatView').style.display='none';
+  dv.classList.add('show');
+}
+
+function chant(id,d){
+  const el=document.getElementById(id);
+  let v=parseInt(el.textContent)+d;
+  if(v<0)v=0; el.textContent=v;
+  if(d>0) showToast('🕉️ जय '+v);
+}
+function backMantra(){
+  document.getElementById('mantraCatView').style.display='';
+  document.getElementById('mantraDetailView').classList.remove('show');
+}
+
+// ═══════════════════ AARTI ═══════════════════
+function initAartiCats(){
+  document.getElementById('aartiCatGrid').innerHTML=AARTIS.map((a,i)=>`
+    <div class="mcat" onclick="showAarti(${i})">
+      <div class="mcat-icon">${a.icon}</div>
+      <div class="mcat-name">${a.name}</div>
+    </div>`).join('');
+}
+
+function showAarti(i){
+  const a=AARTIS[i];
+  const dv=document.getElementById('aartiDetailView');
+  dv.innerHTML=`<button class="back-btn" onclick="backAarti()">← परत जा</button>
+    <div id="aartiContent">
+      <div class="card card-o" style="text-align:center;margin-bottom:12px">
+        <div style="font-size:40px">${a.icon}</div>
+        <h3 style="font-size:18px;font-weight:800;color:var(--maroon);margin-top:8px">${a.name}</h3>
+      </div>
+      <div class="mantra-text aarti-text">${a.text}</div>
+      <div class="mantra-meaning">🌸 <strong>महत्त्व:</strong> ${a.meaning}</div>
+    </div>`;
+  document.getElementById('aartiCatView').style.display='none';
+  dv.classList.add('show');
+}
+function backAarti(){
+  document.getElementById('aartiCatView').style.display='';
+  document.getElementById('aartiDetailView').classList.remove('show');
+}
+
+// ═══════════════════ SERVICES ═══════════════════
+function initSvcGrid(){
+  document.getElementById('svcGrid').innerHTML=SERVICES_DATA.map((s,i)=>`
+    <div class="svc-item" onclick="showSvc(${i})">
+      <div class="svc-icon">${s.icon}</div>
+      <div class="svc-name">${s.name}</div>
+      <div class="svc-desc">${s.desc}</div>
+    </div>`).join('');
+}
+
+function showSvc(i){
+  const s=SERVICES_DATA[i];
+  document.getElementById('svcDetailContent').innerHTML=`
+    <div class="info-banner"><h2>${s.icon} ${s.name}</h2><p>${s.desc}</p></div>
+    <div class="card">
+      <p style="font-size:13px;line-height:2">
+        📋 <strong>सविस्तर माहिती:</strong><br>${s.detail}<br><br>
+        💰 <strong>शुल्क:</strong> ${s.price}<br>
+        ⏱ <strong>कालावधी:</strong> ${s.time}
+      </p>
+      <a href="tel:9969483437" class="call-btn" style="display:flex;margin-top:12px">📞 बुकिंगसाठी कॉल करा</a>
+      <a href="https://wa.me/919969483437?text=मला ${encodeURIComponent(s.name)} बुक करायची आहे" class="call-btn wa-btn" target="_blank" style="display:flex;margin-top:6px">💬 WhatsApp वर बुक करा</a>
+    </div>`;
+  document.getElementById('svcListView').style.display='none';
+  document.getElementById('svcDetailView').classList.add('show');
+}
+function backSvc(){
+  document.getElementById('svcListView').style.display='';
+  document.getElementById('svcDetailView').classList.remove('show');
+}
+
+// ═══════════════════ GURUJI ═══════════════════
+function renderGurujiList(){
+  const el=document.getElementById('gj-list');
+  el.innerHTML=gjList.map((g,i)=>`
+    <div class="guruji-card">
+      <button class="del-btn" onclick="delGj(${i})">🗑 हटवा</button>
+      <div class="gj-header">
+        <div class="gj-avatar">🧙</div>
+        <div class="gj-info">
+          <h3>${g.name}</h3><p>📍 ${g.loc||'महाराष्ट्र'}</p>
+          <span class="badge">${g.sp}</span>
+          ${g.ex?`<span class="badge" style="background:#5D4037;margin-left:4px">${g.ex} वर्षे</span>`:''}
+        </div>
+      </div>
+      ${g.ds?`<p style="font-size:12px;color:var(--mid);margin-bottom:8px">📝 ${g.ds}</p>`:''}
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <a href="tel:${g.ph}" class="call-btn">📞 ${g.ph}</a>
+      <a href="https://wa.me/91${g.ph}" class="call-btn wa-btn" target="_blank">💬 WhatsApp</a>
+    </div>`).join('');
+}
+
+function addGuruji(){
+  const n=document.getElementById('gN').value.trim(), ph=document.getElementById('gPh').value.trim();
+  if(!n||!ph){showToast('⚠️ नाव आणि मोबाईल आवश्यक');return;}
+  gjList.push({name:n,ph,loc:document.getElementById('gLoc').value,sp:document.getElementById('gSp').value,ex:document.getElementById('gEx').value,ds:document.getElementById('gDs').value});
+  localStorage.setItem('gjList',JSON.stringify(gjList));
+  renderGurujiList(); closeGjModal();
+  showToast('✅ गुरुजी जोडले!');
+  ['gN','gPh','gLoc','gEx','gDs'].forEach(id=>document.getElementById(id).value='');
+}
+
+function delGj(i){if(confirm('हटवायचे?')){gjList.splice(i,1);localStorage.setItem('gjList',JSON.stringify(gjList));renderGurujiList();showToast('🗑 हटवले');}}
+function openGjModal(){document.getElementById('gjModal').classList.add('open')}
+function closeGjModal(){document.getElementById('gjModal').classList.remove('open')}
+document.getElementById('gjModal').addEventListener('click',function(e){if(e.target===this)closeGjModal()});
+
+// ═══════════════════ YOGA ═══════════════════
+function saveYoga(){
+  const date=document.getElementById('yDate').value, p=document.getElementById('yPractice').value.trim();
+  if(!date||!p){showToast('⚠️ तारीख आणि साधना प्रकार आवश्यक');return;}
+  yogaLogs.unshift({date,practice:p,dur:document.getElementById('yDur').value,mood:document.getElementById('yMood').value,note:document.getElementById('yNote').value,id:Date.now()});
+  localStorage.setItem('yogaLogs',JSON.stringify(yogaLogs));
+  renderYogaLogs();
+  ['yPractice','yDur','yNote'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('yMood').value='';
+  showToast('✅ योग नोंद जतन झाली!');
+}
+function delYoga(id){yogaLogs=yogaLogs.filter(y=>y.id!==id);localStorage.setItem('yogaLogs',JSON.stringify(yogaLogs));renderYogaLogs();}
+function renderYogaLogs(){
+  const el=document.getElementById('yogaEntries');
+  if(!yogaLogs.length){el.innerHTML='<p style="font-size:12px;color:var(--mid);text-align:center;padding:10px">अद्याप कोणती नोंद नाही</p>';return;}
+  el.innerHTML=yogaLogs.map(y=>`
+    <div class="yoga-entry">
+      <button class="del-yoga" onclick="delYoga(${y.id})">🗑</button>
+      <div class="yoga-date">📅 ${y.date}</div>
+      <div class="yoga-content">🧘 <strong>${y.practice}</strong>${y.dur?' | ⏱ '+y.dur+' मिनिटे':''}${y.mood?' | '+y.mood:''}<br>${y.note||''}</div>
+    </div>`).join('');
+}
+
+// ═══════════════════ NAVIGATION ═══════════════════
+const PAGES=['home','guruji','rashi','kundali','calendar','puja','mantra','aarti','yoga','services','temple'];
+function goPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-tab')[PAGES.indexOf(id)].classList.add('active');
+  document.getElementById('rashiDetail').classList.remove('show');
+  document.querySelectorAll('.rashi-item').forEach(r=>r.classList.remove('sel'));
+}
+
+// ═══════════════════ LANGUAGE ═══════════════════
+const LANGS={mr:{n0:"मुख्य",n1:"गुरुजी",n2:"राशी",n3:"कुंडली",n4:"पंचांग",n5:"पूजा",n6:"मंत्र",n7:"आरती",n8:"योग",n9:"सेवा",n10:"मंदिर",lbl:"MR"},
+  en:{n0:"Home",n1:"Guruji",n2:"Rashi",n3:"Kundali",n4:"Panchang",n5:"Puja",n6:"Mantra",n7:"Aarti",n8:"Yoga",n9:"Services",n10:"Temple",lbl:"EN"},
+  hi:{n0:"मुख्य",n1:"गुरुजी",n2:"राशि",n3:"कुंडली",n4:"पंचांग",n5:"पूजा",n6:"मंत्र",n7:"आरती",n8:"योग",n9:"सेवाएं",n10:"मंदिर",lbl:"HI"}};
+const LANG_ORDER=['mr','en','hi'];
+
+function cycleLang(){
+  lang=LANG_ORDER[(LANG_ORDER.indexOf(lang)+1)%3];
+  const t=LANGS[lang];
+  Object.keys(t).forEach(k=>{const el=document.getElementById(k);if(el)el.textContent=t[k];});
+  document.documentElement.lang=lang;
+  showToast('🌐 '+(lang==='mr'?'मराठी':lang==='en'?'English':'हिंदी'));
+}
+
+// ═══════════════════ TEMPLE ═══════════════════
+const TEMPLE_GODS=[
+  {emoji:"🐘",name:"गणपती",mantra:"ॐ गं गणपतये नमः",aarti:`सुखकर्ता दुखहर्ता वार्ता विघ्नाची।
+नुरवी पुरवी प्रेम कृपा जयाची।
+सर्वांगी सुंदर उटी शेंदुराची।
+कंठी झळके माळ मुक्ताफळांची।।
+
+जय देव जय देव जय मंगलमूर्ती।
+दर्शनमात्रे मन:कामना पुरती।।
+
+रत्नखचित फरा तुज गौरीकुमरा।
+चंदनाची उटी कुमकुम केशरा।
+हीरखचित मुकुट शोभतो बरा।
+रुणझुणती नूपुरे चरणी घागरिया।।`,aartiName:"गणपती आरती",color:"#FF8C00"},
+  {emoji:"🔱",name:"शिव",mantra:"ॐ नमः शिवाय",aarti:`लवथवती विक्राळा ब्रह्मांडी माळा।
+विषे कंठ काळा त्रिनेत्री ज्वाळा।
+लावण्यसुंदर मस्तकी बाळा।
+तेथुनिया जळ निर्मळ वाहे झुळझुळा।।
+
+जय देव जय देव जय श्री शंकरा।
+आरती ओवाळू तुज कर्पूरगौरा।।
+
+कर्पूरगौरा भोळा नयनी विशाळा।
+अर्धांगी पार्वती सुमनांच्या माळा।।`,aartiName:"शिव आरती",color:"#5C6BC0"},
+  {emoji:"🌺",name:"दुर्गा",mantra:"ॐ दुं दुर्गायै नमः",aarti:`जयंती मंगला काली भद्रकाली कपालिनी।
+दुर्गा क्षमा शिवा धात्री स्वाहा स्वधा नमोऽस्तुते।।
+
+या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता।
+नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः।।
+
+जय अंबे गौरी मैया जय श्यामा गौरी।
+तुमको निशदिन ध्यावत हरि ब्रह्मा शिवरी।।`,aartiName:"दुर्गा आरती",color:"#C62828"},
+  {emoji:"🦚",name:"श्रीकृष्ण",mantra:"ॐ नमो भगवते वासुदेवाय",aarti:`आरती कुंजबिहारी की।
+श्री गिरिधर कृष्णमुरारी की।।
+
+गले में बैजंती माला, बजावत मुरली मधुर बाला।
+श्रवण में कुण्डल झलकाला, नंद के आनंद नंदलाला।।
+
+ललित त्रिभंग ठाढे, करत मुरली मधुर बाजे।
+उर पर कौस्तुभ माला, अर्पण करूं सब माला।।`,aartiName:"श्रीकृष्ण आरती",color:"#1565C0"},
+  {emoji:"🌸",name:"लक्ष्मी",mantra:"ॐ श्रीं महालक्ष्म्यै नमः",aarti:`ॐ जय लक्ष्मी माता, मैया जय लक्ष्मी माता।
+तुमको निशदिन सेवत, हर विष्णु विधाता।।
+
+उमा रमा ब्रह्माणी, तुम ही जग-माता।
+सूर्य-चंद्रमा ध्यावत, नारद ऋषि गाता।।
+
+दुर्गारूप निरंजनि, सुख संपति दाता।
+जो कोई तुमको ध्यावत, ऋद्धि-सिद्धि धन पाता।।`,aartiName:"लक्ष्मी आरती",color:"#F57F17"},
+  {emoji:"🐒",name:"हनुमान",mantra:"ॐ हनुमते नमः",aarti:`आरती कीजे हनुमान लला की।
+दुष्ट दलन रघुनाथ कला की।।
+
+जाके बल से गिरिवर कांपे।
+रोग-दोष जाके निकट न झांके।।
+
+अंजनिपुत्र महा बलदाई।
+संतन के प्रभु सदा सहाई।।
+
+जय जय जय हनुमान गोसाईं।
+कृपा करो गुरुदेव की नाईं।।`,aartiName:"हनुमान आरती",color:"#E65100"},
+  {emoji:"☀️",name:"सूर्यनारायण",mantra:"ॐ सूर्याय नमः",aarti:`आरती सूर्यनारायणाची।
+जय जय आदित्य भास्कराची।।
+
+सहस्रांशु कोटी तेजस्वी।
+भुवनत्रय व्यापक विश्वाची।।
+
+जय देव जय देव जय भास्करा।
+तव किरणे जगाचे जीवन चाला।।`,aartiName:"सूर्य आरती",color:"#F9A825"},
+  {emoji:"🧡",name:"विष्णू",mantra:"ॐ नमो नारायणाय",aarti:`शांताकारम भुजगशयनम पद्मनाभम सुरेशम।
+विश्वाधारम गगनसदृशम मेघवर्णं शुभांगम।।
+
+लक्ष्मीकांतम कमलनयनम योगिभिर्ध्यानगम्यम।
+वन्दे विष्णुं भवभयहरम सर्वलोकैकनाथम।।
+
+जय विष्णु भगवान जय नारायणा।
+जय पद्मनाभ जय लोकपालना।।`,aartiName:"विष्णू आरती",color:"#2E7D32"},
+  {emoji:"🌙",name:"चंद्रदेव",mantra:"ॐ सोमाय नमः",aarti:`जय जय चंद्रमा सोमेश्वरा।
+त्रिभुवनपालक शीतल सुंदरा।।
+
+नक्षत्रगण नित सेवा करिती।
+औषधीपती पीयूषधारिती।।
+
+जय देव जय देव जय चंद्रदेवा।
+नित्य तुझी पूजिती देवगणसेवा।।`,aartiName:"चंद्र आरती",color:"#5C6BC0"},
+];
+
+let selectedGodIdx=-1, aartiActive=false, agarbattiActive=false;
+let flowerInterval=null, aartiSpeech=null;
+
+function initTempleGods(){
+  const grid=document.getElementById('templeGodGrid');
+  grid.innerHTML=TEMPLE_GODS.map((g,i)=>`
+    <div class="temple-god-card" id="tgc-${i}" onclick="selectGod(${i})">
+      <span class="tg-emoji">${g.emoji}</span>
+      <div class="tg-name">${g.name}</div>
+      <div class="tg-mantra">${g.mantra.substring(0,18)}...</div>
+    </div>`).join('');
+  document.getElementById('vtempleWrap').classList.remove('show');
+}
+
+function selectGod(idx){
+  if(aartiActive) stopAarti();
+  selectedGodIdx=idx;
+  const g=TEMPLE_GODS[idx];
+  document.querySelectorAll('.temple-god-card').forEach((c,i)=>{
+    c.classList.toggle('selected-god',i===idx);
+  });
+  document.getElementById('godMainEmoji').textContent=g.emoji;
+  document.getElementById('godShrineName').textContent=g.name;
+  document.getElementById('godShrineMantra').textContent=g.mantra;
+  document.getElementById('vtempleWrap').classList.add('show');
+  showToast('🙏 '+g.name+'चे दर्शन घेतले। जय '+g.name+'!');
+}
+
+function throwFlowers(){
+  if(selectedGodIdx<0){showToast('⚠️ आधी देव निवडा');return;}
+  const container=document.getElementById('flowerContainer');
+  const flowers=['🌸','🌺','🌼','🌻','💐','🌷','🪷'];
+  for(let i=0;i<18;i++){
+    setTimeout(()=>{
+      const f=document.createElement('span');
+      f.textContent=flowers[Math.floor(Math.random()*flowers.length)];
+      f.className='flower-particle';
+      f.style.left=Math.random()*90+'%';
+      f.style.top='-20px';
+      f.style.animationDuration=(1.5+Math.random()*2)+'s';
+      f.style.fontSize=(10+Math.random()*10)+'px';
+      container.appendChild(f);
+      setTimeout(()=>f.remove(),3500);
+    },i*120);
+  }
+  const btn=document.getElementById('btnFlowers');
+  btn.classList.add('active-ctrl');
+  setTimeout(()=>btn.classList.remove('active-ctrl'),2000);
+  showToast('🌸 फुले अर्पण केली! जय '+TEMPLE_GODS[selectedGodIdx].name+'!');
+}
+
+function startAarti(){
+  if(selectedGodIdx<0){showToast('⚠️ आधी देव निवडा');return;}
+  const g=TEMPLE_GODS[selectedGodIdx];
+  aartiActive=true;
+  // rotate aarti plate
+  document.getElementById('aartiPlate').classList.add('rotating');
+  // throw flowers during aarti
+  throwFlowers();
+  // show aarti panel
+  document.getElementById('aartiPanelTitle').textContent=g.aartiName;
+  document.getElementById('aartiPanelText').textContent=g.aarti;
+  document.getElementById('aartiPanel').classList.add('show');
+  document.getElementById('btnAarti').classList.add('active-ctrl');
+  document.getElementById('btnStop').style.display='';
+  // play audio via SpeechSynthesis
+  if('speechSynthesis' in window){
+    window.speechSynthesis.cancel();
+    aartiSpeech=new SpeechSynthesisUtterance(g.aartiName+'\n'+g.aarti);
+    aartiSpeech.lang='hi-IN';
+    aartiSpeech.rate=0.8;
+    aartiSpeech.pitch=1.1;
+    aartiSpeech.volume=1;
+    aartiSpeech.onend=()=>{if(aartiActive)stopAarti();};
+    window.speechSynthesis.speak(aartiSpeech);
+  }
+  // bell during aarti
+  ringBell();
+  showToast('🪔 आरती सुरू झाली! '+g.aartiName);
+}
+
+function stopAarti(){
+  aartiActive=false;
+  document.getElementById('aartiPlate').classList.remove('rotating');
+  document.getElementById('aartiPanel').classList.remove('show');
+  document.getElementById('btnAarti').classList.remove('active-ctrl');
+  document.getElementById('btnStop').style.display='none';
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+  showToast('🙏 आरती पूर्ण झाली!');
+}
+
+function toggleAgarbatti(){
+  agarbattiActive=!agarbattiActive;
+  const wrap=document.getElementById('agarbattiWrap');
+  const btn=document.getElementById('btnAgarbatti');
+  wrap.style.opacity=agarbattiActive?'1':'0.4';
+  wrap.style.transition='opacity .4s';
+  btn.classList.toggle('active-ctrl',agarbattiActive);
+  if(selectedGodIdx>=0)
+    showToast(agarbattiActive?'🕯️ अगरबत्ती लावली! सुगंध पसरला।':'🕯️ अगरबत्ती विझवली।');
+  else showToast('⚠️ आधी देव निवडा');
+}
+
+function ringBell(){
+  if(selectedGodIdx<0 && !aartiActive){showToast('⚠️ आधी देव निवडा');return;}
+  const icon=document.getElementById('bellIcon');
+  icon.classList.remove('bell-anim');
+  void icon.offsetWidth;
+  icon.classList.add('bell-anim');
+  // bell sound via AudioContext
+  playBellSound();
+  setTimeout(()=>icon.classList.remove('bell-anim'),1100);
+  if(!aartiActive) showToast('🔔 घंटा वाजवला! ॐ ॐ ॐ');
+}
+
+function blowShankh(){
+  if(selectedGodIdx<0){showToast('⚠️ आधी देव निवडा');return;}
+  const icon=document.getElementById('shankhIcon');
+  icon.classList.remove('shankh-anim');
+  void icon.offsetWidth;
+  icon.classList.add('shankh-anim');
+  playShankhSound();
+  setTimeout(()=>icon.classList.remove('shankh-anim'),1500);
+  showToast('🐚 शंख वाजवला! ॐ शांती शांती शांती!');
+}
+
+function playBellSound(){
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const osc=ctx.createOscillator();
+    const gain=ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type='sine'; osc.frequency.setValueAtTime(880,ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(440,ctx.currentTime+0.8);
+    gain.gain.setValueAtTime(0.6,ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+1.2);
+    osc.start(ctx.currentTime); osc.stop(ctx.currentTime+1.2);
+    // second harmonic
+    const osc2=ctx.createOscillator(); const gain2=ctx.createGain();
+    osc2.connect(gain2); gain2.connect(ctx.destination);
+    osc2.type='sine'; osc2.frequency.setValueAtTime(1320,ctx.currentTime);
+    osc2.frequency.exponentialRampToValueAtTime(660,ctx.currentTime+0.6);
+    gain2.gain.setValueAtTime(0.3,ctx.currentTime);
+    gain2.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.8);
+    osc2.start(ctx.currentTime); osc2.stop(ctx.currentTime+0.8);
+  }catch(e){}
+}
+
+function playShankhSound(){
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const bufferSize=ctx.sampleRate*2;
+    const buffer=ctx.createBuffer(1,bufferSize,ctx.sampleRate);
+    const data=buffer.getChannelData(0);
+    for(let i=0;i<bufferSize;i++) data[i]=(Math.random()*2-1)*0.3;
+    const source=ctx.createBufferSource(); source.buffer=buffer;
+    const filter=ctx.createBiquadFilter(); filter.type='bandpass';
+    filter.frequency.value=300; filter.Q.value=2;
+    const osc=ctx.createOscillator(); const oGain=ctx.createGain();
+    osc.type='sawtooth'; osc.frequency.setValueAtTime(120,ctx.currentTime);
+    osc.frequency.linearRampToValueAtTime(80,ctx.currentTime+1.5);
+    oGain.gain.setValueAtTime(0.5,ctx.currentTime);
+    oGain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+1.8);
+    osc.connect(oGain); oGain.connect(ctx.destination);
+    osc.start(); osc.stop(ctx.currentTime+1.8);
+    source.connect(filter); filter.connect(ctx.destination);
+    const sGain=ctx.createGain(); sGain.gain.setValueAtTime(0.2,ctx.currentTime);
+    sGain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+1.8);
+    source.connect(sGain); sGain.connect(ctx.destination);
+    source.start(); source.stop(ctx.currentTime+1.8);
+  }catch(e){}
+}
+
+// ═══════════════════ TOAST ═══════════════════
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
+</script>
+</body>
+</html>
