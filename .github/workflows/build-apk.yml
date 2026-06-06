@@ -1,0 +1,44 @@
+name: Build Android APK Offline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install dependencies
+        working-directory: react_native_app
+        run: npm ci || npm install
+
+      - name: Prebuild Android (Generate native code)
+        working-directory: react_native_app
+        run: npx expo prebuild --platform android --clean
+
+      - name: Build APK (Assemble Release)
+        working-directory: react_native_app/android
+        run: ./gradlew assembleRelease
+
+      - name: Upload APK to Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ShivShakti-App-APK
+          path: react_native_app/android/app/build/outputs/apk/release/app-release.apk

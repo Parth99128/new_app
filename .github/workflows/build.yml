@@ -1,0 +1,39 @@
+name: EAS Build and Publish
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Install and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Expo and EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          packager: npm
+
+      - name: Install dependencies
+        working-directory: react_native_app
+        run: npm ci || npm install
+
+      # If you want to automatically build Android APKs/AABs via EAS:
+      # - name: Build Android App (APK)
+      #   working-directory: react_native_app
+      #   run: eas build --platform android --profile preview --non-interactive
+      #   env:
+      #     EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
